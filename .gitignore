@@ -22,10 +22,18 @@ build/Release
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-node_modules
+/node_modules
+.npm-debug.log
 
 # Users Environment Variables
 .lock-wscript
 
 #bower components
-bower_components
+/bower_components
+
+#Temp files
+/dist
+/tmp 
+
+#sass cache
+/.sass-cache
