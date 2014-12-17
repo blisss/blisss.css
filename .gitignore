@@ -33,7 +33,7 @@ build/Release
 
 #Temp files
 /dist
-/tmp 
+/tmp
 
 #sass cache
 /.sass-cache
