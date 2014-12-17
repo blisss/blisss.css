@@ -6,6 +6,7 @@ $values: (
 	"08": 0.8em,
 	"085": 0.85em
 ) !default;
+
 @each $name, $value in $values {
 	.p#{$name}, %p#{$name} {
 		padding: $value;
