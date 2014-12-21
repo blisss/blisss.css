@@ -1,0 +1,21 @@
+$directions: ("top", "right", "bottom", "left") !default;
+$values: (
+	"0": 0,
+	"1": 1em,
+	"05": 0.5em,
+	"08": 0.8em,
+	"085": 0.85em
+) !default;
+
+@each $name, $value in $values {
+	.p#{$name}, %p#{$name} {
+		padding: $value;
+	}
+	.m#{$name}, %m#{$name} {
+		margin: $value;
+	}
+}
+
+%pl16 {
+	padding-left: 16px;
+}
