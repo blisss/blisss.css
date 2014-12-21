@@ -1,21 +1,52 @@
 
-
-@function css-perfix-loop($property, $isUsed: false, $but...) {
-  $perfixs: ("webkit", "moz", "ms", "o") !default;
-  @if $property {
-    @debug "property is null";
+@function css-perfix-select($use...) {
+  $first: nth(nth($use, 1), 1);
+  $css-perfix-string: "webkit moz ms o";
+  @if $first == "all" {
+    @return ("webkit", "moz", "ms", "o");
+  } @else if $first == "base" {
+    @return ("webkit", "moz");
   } @else {
-
+    $custom: ();
+    $use: nth($use, 1);
+    @if str-slice(nth($use, 1), 1, 1) != "!" {
+      @each $item in $use {
+        $custom: append($custom, $item, "comma");
+      }
+    } @else {
+      @each $item in $use {
+        $but: str-slice($item, 2, -1);
+        $but-index: str-index($css-perfix-string, $but);
+        $but-len: str-length($but);
+        $before: str-slice($css-perfix-string, 1, $but-index - 1);
+        $after: str-slice($css-perfix-string, $but-index + $but-len + 1, -1);
+        $css-perfix-string: $before + $after;
+      }
+      @each $item in str-split($css-perfix-string, " ") {
+        @debug $item;
+        $custom: append($custom, $item, "comma");
+      }
+    }
+    @return $custom;
   }
-  @each $perfix in $perfixs {
-    @return "-#{$perfix}-#{$property}";
+}
+
+@function css-perfix-loop($property, $use...) {
+  $perfixs-name: css-perfix-select($use);
+  $perfixs-property: ();
+  @each $perfix in $perfixs-name {
+    $perfixs-property: append($perfixs-property, "-#{$perfix}-#{$property}");
+  }
+  $perfixs-property: append($perfixs-property, "#{$property}");
+  @return $perfixs-property;
+}
+
+@mixin css-perfix($selector, $property, $value, $perfix-setting: "base") {
+  #{$selector} {
+    @each $perfix-property in css-perfix-loop($property, $perfix-setting) {
+      #{$perfix-property}: #{$value};
+    }
   }
 }
 
-@mixin css-perfix($selector, $property, $value) {
-  
-}
-
-.test {
-    #{css-perfix(transition)}: all 0.4s ease;
-}
+@include css-perfix(".test", "transition", "all 0.4s ease");

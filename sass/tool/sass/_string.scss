@@ -1,0 +1,24 @@
+@function str-split($string, $split) {
+  $value: ();
+  $append: false;
+  @for $i from 1 through str-length($string) {
+    $split-index: str-index($string, $split);
+    @if $split-index != 1 {
+      @if $split-index == null {
+        @if $append == false {
+          $value: append($value, $string);
+          $append: true;
+        }
+      } @else {
+        $split-len: str-length($split);
+        $before: str-slice($string, 1, $split-index - 1);
+        $after: str-slice($string, $split-index + $split-len, -1);
+        $string: $after;
+        $value: append($value, $before);
+      }
+    } @else {
+      $value: append($value, str-slice($string, $i, $i));
+    }
+  }
+  @return $value;
+}
