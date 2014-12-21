@@ -1,3 +1,18 @@
+/**
+  将一个字符串分割，返回一个数组，类似于js的String.property.split()
+
+  simple use as:
+
+  ```sass
+  str-split("webkit moz ms o", " ");
+  // ("webkit", "moz", "ms", "o")
+  ```
+  
+  @method str-split
+  @param {String} 要分割的字符串
+  @param {String} 分割标记
+  @return {List} 返回分割好的list
+ */
 @function str-split($string, $split) {
   $value: ();
   $append: false;
@@ -21,4 +36,14 @@
     }
   }
   @return $value;
+}
+
+$test: true;
+@if $test {
+  @debug "t: str-split(\"webkit moz ms o\", \"\")";
+  @debug "v: #{str-split("webkit moz ms o", "")}";
+  @debug "t: str-split(\"webkit moz ms o\", \" \")";
+  @debug "v: #{str-split("webkit moz ms o", " ")}";
+  @debug "t: str-split(\"webkit moz ms o\", \" moz \")";
+  @debug "v: #{str-split("webkit moz ms o", " moz ")}";
 }
