@@ -1,4 +1,20 @@
+/**
+  从webkit moz ms o中选择匹配的前缀，返回一个数组.
 
+  simple use as:
+  ```sass
+  css-perfix-select("base");
+  // ("webkit", "moz")
+  css-perfix-select("moz ms");
+  // ("moz", "ms")
+  css-perfix-select("!moz");
+  // ("webkit", "ms", "o")
+  ```
+
+  @method css-perfix-select
+  @param {List} "all", "base", any used perfix value or not
+  @return {List}
+*/
 @function css-perfix-select($use...) {
   $first: nth(nth($use, 1), 1);
   $css-perfix-string: "webkit moz ms o";
@@ -8,7 +24,6 @@
     @return ("webkit", "moz");
   } @else {
     $custom: ();
-    $use: nth($use, 1);
     @if str-slice(nth($use, 1), 1, 1) != "!" {
       @each $item in $use {
         $custom: append($custom, $item, "comma");
@@ -23,7 +38,6 @@
         $css-perfix-string: $before + $after;
       }
       @each $item in str-split($css-perfix-string, " ") {
-        @debug $item;
         $custom: append($custom, $item, "comma");
       }
     }
@@ -31,6 +45,34 @@
   }
 }
 
+$test-css-perfix-select: false;
+@if $test-css-perfix-select {
+  @debug "test css-perfix-select";
+  @debug "t: css-perfix-select(\"all\")";
+  @debug "v: #{css-perfix-select("all")}";
+  @debug "t: css-perfix-select(\"base\")";
+  @debug "v: #{css-perfix-select("base")}";
+  @debug "t: css-perfix-select(\"webkit\", \"moz\")";
+  @debug "v: #{css-perfix-select("webkit", "moz")}";
+  @debug "t: css-perfix-select(\"!webkit \"!moz\")";
+  @debug "v: #{css-perfix-select("!webkit", "!moz")}";
+  @debug "";
+}
+
+/**
+  将前缀和属性拼在一起.
+
+  simple to use:
+  ```sass
+  css-perfix-loop("transition", "base");
+  // ("-webkit-transition", "-moz-transition", "transition")
+  ```
+
+  @method css-perfix-loop
+  @param {String} property ex. "transition".
+  @param {List} arguments used for `css-perfix-select` function.
+  @return {List}
+*/
 @function css-perfix-loop($property, $use...) {
   $perfixs-name: css-perfix-select($use);
   $perfixs-property: ();
@@ -41,12 +83,25 @@
   @return $perfixs-property;
 }
 
-@mixin css-perfix($selector, $property, $value, $perfix-setting: "base") {
-  #{$selector} {
-    @each $perfix-property in css-perfix-loop($property, $perfix-setting) {
-      #{$perfix-property}: #{$value};
-    }
+
+/**
+  创建css浏览器厂商前缀，可用的值有webkit, moz, ms, o.
+
+  ### Simple use
+
+  ```sass
+  .test {
+    @include css-perfix("transition", "all 0.4s ease");
+  }
+  ```
+  @mixin css-perfix
+  @param {String} 需要加前缀的属性
+  @param {String} 要赋给属性的值
+  @param {List} 设置要加的前置,`all` 表示四种都加, `base`(default) 表示只加webkit
+  和moz, 或者输入一个自定义参数，详情见css-perfix-select
+*/
+@mixin css-perfix($property, $value, $perfix-setting: "base") {
+  @each $perfix-property in css-perfix-loop($property, $perfix-setting) {
+    #{$perfix-property}: #{$value};
   }
 }
-
-@include css-perfix(".test", "transition", "all 0.4s ease");
