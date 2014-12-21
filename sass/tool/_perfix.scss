@@ -1,0 +1,21 @@
+
+
+@function css-perfix-loop($property, $isUsed: false, $but...) {
+  $perfixs: ("webkit", "moz", "ms", "o") !default;
+  @if $property {
+    @debug "property is null";
+  } @else {
+
+  }
+  @each $perfix in $perfixs {
+    @return "-#{$perfix}-#{$property}";
+  }
+}
+
+@mixin css-perfix($selector, $property, $value) {
+  
+}
+
+.test {
+    #{css-perfix(transition)}: all 0.4s ease;
+}

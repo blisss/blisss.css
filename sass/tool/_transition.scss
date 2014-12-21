@@ -1,0 +1,69 @@
+@function timing-type($length) {
+	@if $length == 2 {
+		@return "steps";
+	} @else if $length == 4 {
+		@return "bezier";
+	} @else {
+		@return "keyword";
+	}
+}
+
+@function timing-keyword($keyword) {
+	$keyword: nth($keyword , 1);
+	$default: ease-out-in;
+	@if $keyword == eoi {
+		@return ease-out-in;
+	} @else if $keyword == ei {
+		@return ease-in;
+	} @else if $keyword == eo {
+		@return ease-out;
+	} @else if $keyword == l {
+		@return linear;
+	} @else if $keyword == e {
+		@return ease;
+	} @else {
+		@return $default;
+	}
+}
+
+@function timing-bezier($value) {
+	$x1: nth($value , 1);
+	$y1: nth($value , 2);
+	$x2: nth($value , 3);
+	$y2: nth($value , 4);
+	@return cubic-bezier(#{$x1}, #{$y1}, #{$x2}, #{$y2});
+}
+
+@function timing-steps($value) {
+	$number: nth($value , 1);
+	$direction: nth($value , 2);
+	$direction-enum: (start, end);
+	$direction-right: contains($direction, $direction-enum);
+	@if $direction-right {
+		@return steps(#{$number}, #{$direction});
+	} @else {
+		@return steps(#{$number}, start);
+	}
+}
+
+@function timing-function($arguments...) {
+	$type: timing-type(length($arguments));
+	$default: "ease-out-in";
+	@if $type == "keyword" {
+		@return timing-keyword($arguments);
+	} @else if $type == "bezier" {
+		@return timing-bezier($arguments);
+	} @else if $type == "steps" {
+		@return timing-steps($arguments);
+	} @else {
+		@return $default;
+	}
+}
+
+@mixin transition($property: all, $duration: 0.4s, $timing-function: timing-function(eoi), $delay: 0s) {
+	$transition-property: $property;
+	$transition-duration: $duration;
+	$transition-timing-function: $timing-function;
+	$transition-delay: $delay;
+	transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+}
