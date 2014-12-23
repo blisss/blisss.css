@@ -1,0 +1,106 @@
+$namespace: "typographic";
+
+html {
+  font-family: "Noto Sans CJK SC";
+}
+
+%fwl { font-weight: 100; }
+%fwr { font-weight: 400; }
+%fwm { font-weight: 600; }
+
+$font-size: (12, 13, 14, 15, 16, 20, 24, 34, 45, 56, 112) !default;
+
+@each $size in $font-size {
+  %fz#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+%fc87 { color: rgba(0, 0, 0, .87); }
+%fc54 { color: rgba(0, 0, 0, .54); }
+
+%fl4a { line-height: 1.4285em; }
+%fl4b { line-height: 1.7142em; }
+%fl3a { line-height: 1.5em; }
+%fl3b { line-height: 1.75em; }
+%fl2  { line-height: 1.3333em; }
+%fl1a { line-height: 1.1764em; }
+%fl1b { line-height: 1.0667em; }
+%fl   { line-height: 1em; }
+
+.ty-button {
+  @extend %fwm;
+  @extend %fz14;
+  @extend %fc87;
+  @extend %fl;
+}
+
+.ty-caption {
+  @extend %fwr;
+  @extend %fz12;
+  @extend %fc54;
+  @extend %fl;
+}
+
+.ty-body1 {
+  @extend %fwr;
+  @extend %fz14;
+  @extend %fc87;
+  @extend %fl4a;
+}
+
+.ty-body2 {
+  @extend %fwm;
+  @extend %fz14;
+  @extend %fc87;
+  @extend %fl4b;
+}
+
+.ty-subhead {
+  @extend %fwr;
+  @extend %fz16;
+  @extend %fc87;
+  @extend %fl3a;
+}
+
+.ty-title {
+  @extend %fwm;
+  @extend %fz20;
+  @extend %fc87;
+  @extend %fl;
+}
+
+.ty-headline {
+  @extend %fwr;
+  @extend %fz24;
+  @extend %fc87;
+  @extend %fl2;
+}
+
+.ty-display1x {
+  @extend %fwr;
+  @extend %fz34;
+  @extend %fc54;
+  @extend %fl1a;
+}
+
+.ty-display2x {
+  @extend %fwr;
+  @extend %fz45;
+  @extend %fc54;
+  @extend %fl1b;
+}
+
+.ty-display3x {
+  @extend %fwr;
+  @extend %fz56;
+  @extend %fc54;
+  @extend %fl;
+}
+
+.ty-display4x {
+  @extend %fwl;
+  @extend %fz112;
+  @extend %fc54;
+  @extend %fl;
+}
