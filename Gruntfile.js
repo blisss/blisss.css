@@ -2,7 +2,7 @@ var Grunt = function (grunt) {
 
 	/*------------------------------------*\
 		Load Package
-		加载依赖，依赖声明在package.json中 
+		加载依赖，依赖声明在package.json中
 	\*------------------------------------*/
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-livereload');
@@ -11,11 +11,11 @@ var Grunt = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	
+
 
 	/*------------------------------------*\
 		Config Grunt Tool
-		配置Grunt工具 
+		配置Grunt工具
 	\*------------------------------------*/
 	grunt.initConfig({
 
@@ -41,13 +41,13 @@ var Grunt = function (grunt) {
 
 		watch: {
 			main: {
-				files: ['sass/**/*', '*.html', 'Gruntfile.js'],
+				files: ['sass/**/*.scss', '*.html', 'Gruntfile.js'],
 				tasks: ['inject:main'],
 				options: {
 					livereload: true
 				}
 			},
-			
+
 		},
 
 
@@ -95,8 +95,8 @@ var Grunt = function (grunt) {
 
 		sass: {
 			main: {
-				expand: true, 
-				flatten: true, 
+				expand: true,
+				flatten: true,
 				ext: '.css',
 				src: ['sass/blisss.scss'],
 				dest: '<%=stylesPath%>'
@@ -122,11 +122,11 @@ var Grunt = function (grunt) {
 
 	/*------------------------------------*\
 		Tasks::Development Environment
-		配置开发环境任务 
+		配置开发环境任务
 	\*------------------------------------*/
 	grunt.registerTask('default', [
-		'connect:main', 
-		'inject:main', 
+		'connect:main',
+		'inject:main',
 		'watch:main'
 	]);
 
@@ -156,7 +156,7 @@ var Grunt = function (grunt) {
 
 
 	/*------------------------------------*\
-		Tasks::Build 
+		Tasks::Build
 		打包文件
 	\*------------------------------------*/
 	grunt.registerTask('build', [
