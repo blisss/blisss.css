@@ -1,0 +1,51 @@
+/**
+  将一个字符串分割，返回一个数组，类似于js的String.property.split()
+
+  simple use as:
+
+  ```sass
+  str-split("webkit moz ms o", " ");
+  // ("webkit", "moz", "ms", "o")
+  ```
+
+  @method str-split
+  @param {String} 要分割的字符串
+  @param {String} 分割标记
+  @return {List} 返回分割好的list
+*/
+@function str-split($string, $split) {
+  $value: ();
+  $append: false;
+  @for $i from 1 through str-length($string) {
+    $split-index: str-index($string, $split);
+    @if $split-index != 1 {
+      @if $split-index == null {
+        @if $append == false {
+          $value: append($value, $string);
+          $append: true;
+        }
+      } @else {
+        $split-len: str-length($split);
+        $before: str-slice($string, 1, $split-index - 1);
+        $after: str-slice($string, $split-index + $split-len, -1);
+        $string: $after;
+        $value: append($value, $before);
+      }
+    } @else {
+      $value: append($value, str-slice($string, $i, $i));
+    }
+  }
+  @return $value;
+}
+
+$test: false;
+@if $test {
+  @debug "test str-split";
+  @debug "t: str-split(\"webkit moz ms o\", \"\")";
+  @debug "v: #{str-split("webkit moz ms o", "")}";
+  @debug "t: str-split(\"webkit moz ms o\", \" \")";
+  @debug "v: #{str-split("webkit moz ms o", " ")}";
+  @debug "t: str-split(\"webkit moz ms o\", \" moz \")";
+  @debug "v: #{str-split("webkit moz ms o", " moz ")}";
+  @debug ""
+}
