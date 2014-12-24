@@ -13,11 +13,26 @@ $align-items: ("center", "flex-start", "flex-end", "baseline", "stretch") !defau
   align-content: unquote(nth($align-content, 1));
   align-items: unquote(nth($align-items, 1));
 }
-
+%flex-left {
+  justify-content: unquote(nth($justify-content, 1));
+}
 %flex-item {
   order: 0;
   flex: 0 0 auto;
   align-self: auto;
-  min-height: 100%;
+  min-height: auto;
   min-width: auto;
+}
+
+@mixin flex-single($justify: center, $direction: row, $items: center) {
+  display: flex;
+  flex-flow: $direction nowrap;
+  justify-content: $justify;
+  align-content: center;
+  align-items: $items;
+}
+
+@mixin flex-single-item($order: 0, $grow: 0, $shrink: 0) {
+  order: $order;
+  flex: $grow $shrink auto;
 }
