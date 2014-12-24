@@ -28,12 +28,16 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 
-#bower components
+# Bower components
 /bower_components
 
-#Temp files
+# Temp files
 /dist
 /tmp
 
-#sass cache
+# Sass cache
 /.sass-cache
+
+# Fonts & Images
+/fonts
+/images

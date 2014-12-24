@@ -1,0 +1,114 @@
+$namespace: "material-list";
+
+$list-line:   ("single", "two", "three") !default;
+$list-style:  ("text", "icon", "avatar", "all") !default;
+
+$list-line-single:  nth($list-line, 1);
+$list-line-two:     nth($list-line, 2);
+$list-line-three:   nth($list-line, 3);
+$list-style-text:   nth($list-style, 1);
+$list-style-icon:   nth($list-style, 2);
+$list-style-avatar: nth($list-style, 3);
+$list-style-all:    nth($list-style, 4);
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+.primary-text {
+  @extend %fwr;
+  @extend %fz16;
+  @extend %fc87;
+  @extend %fl3a;
+}
+.secondary-text {
+  @extend %fwr;
+  @extend %fz14;
+  @extend %fc54;
+  @extend %fl4a;
+}
+
+$list-padding: 16px;
+
+.#{$namespace} {
+  ul { padding-top: 8px; }
+  li {
+    padding-left: $list-padding; padding-right: $list-padding;
+    @include flex-single(flex-start);
+  }
+
+  $avatar:  selector-append(&, "__content--avatar");
+  $icon:    selector-append(&, "__content--icon");
+  $text:    selector-append(&, "__content--text");
+
+  $line-single:   selector-append(&, "__line--", $list-line-single);
+  $line-two:      selector-append(&, "__line--", $list-line-two);
+  $line-three:    selector-append(&, "__line--", $list-line-three);
+
+  $style-text:    selector-append(&, "__style--", $list-style-text);
+  $style-icon:    selector-append(&, "__style--", $list-style-icon);
+  $style-avatar:  selector-append(&, "__style--", $list-style-avatar);
+  $style-all:     selector-append(&, "__style--", $list-style-all);
+
+  $size-left:  72px - $list-padding;
+  $size-right: 56px - $list-padding;
+
+  // Tile height
+  &#{$line-single} {
+    &#{$style-text}, &#{$style-icon} {
+      li { height: 48px; }
+    }
+    &#{$style-avatar}, &#{$style-all} {
+      li { height: 56px; }
+    }
+  }
+  &#{$line-two} {
+    li { height: 72px; }
+  }
+  &#{$line-three} {
+    li { height: 88px; }
+  }
+
+  // order
+  &#{$line-single}, &#{$line-two}, &#{$line-three} {
+    &#{$style-icon} {
+      #{$icon} {
+        @include flex-single-item(1);
+        min-width: $size-left;
+      }
+      #{$text} {
+        @include flex-single-item(2);
+      }
+    }
+    &#{$style-avatar}, &#{$style-all} {
+      #{$avatar} {
+        @include flex-single-item(1);
+        min-width: $size-left;
+      }
+      #{$text} {
+        @include flex-single-item(2, 1, 1);
+      }
+    }
+    &#{$style-all} {
+      #{$icon} {
+        @include flex-single-item(3);
+        min-width: $size-right;
+        padding-left: $list-padding;
+      }
+    }
+  }
+
+  // top-align
+  &#{$line-three} {
+    #{$text}, #{$icon}, #{$avatar} {
+      min-height: 100%;
+      padding-top: $list-padding;
+    }
+  }
+}
