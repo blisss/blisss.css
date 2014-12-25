@@ -24,15 +24,15 @@ $align-items: ("center", "flex-start", "flex-end", "baseline", "stretch") !defau
   min-width: auto;
 }
 
-@mixin flex-single($justify: center, $direction: row, $items: center) {
+@mixin flex-single($justify: center, $flow: row nowarp, $items: center) {
   display: flex;
-  flex-flow: $direction nowrap;
+  flex-flow: $flow;
   justify-content: $justify;
   align-content: center;
   align-items: $items;
 }
 
-@mixin flex-single-item($order: 0, $grow: 0, $shrink: 0) {
+@mixin flex-single-item($order: 0, $grow: 0, $shrink: 0, $basic: auto) {
   order: $order;
-  flex: $grow $shrink auto;
+  flex: $grow $shrink $basic;
 }
