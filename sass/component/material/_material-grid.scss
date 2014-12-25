@@ -1,0 +1,91 @@
+$namespace: "material-grid";
+
+$grid-line: ("single", "two", "three") !default;
+
+$grid-line-single:  nth($grid-line, 1);
+$grid-line-two:     nth($grid-line, 2);
+
+
+
+
+.#{$namespace} {
+
+  $grid-padding: 4px; // 1px
+  $grid-bar-padding: 16px;
+
+  .primary-text {
+    @extend %fwr;
+    @extend %fz16;
+    @extend %fcw87;
+    @extend %fl4a;
+  }
+  .secondary-text {
+    @extend %fwl;
+    @extend %fz12;
+    @extend %fcw87;
+    @extend %fl4b;
+  }
+
+  ul {
+    @include flex-single(flex-start, row wrap);
+    padding: $grid-padding $grid-padding / 2 0;
+  }
+
+
+  li {
+    @include flex-single-item(0, 0, 0, 50%); // 33.3333%
+    padding: 0 $grid-padding / 2 $grid-padding;
+  }
+
+  .material-grid__content {
+    position: relative;
+    img { width: 100%; height: auto; }
+  }
+
+  .material-grid__bar {
+    @include flex-single(flex-start);
+    padding: 0 $grid-bar-padding;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  $line-single:   selector-append(&, "__line--", $grid-line-single);
+  $line-two:      selector-append(&, "__line--", $grid-line-two);
+
+  // Tile height
+  &#{$line-single} {
+    .material-grid__bar { height: 48px; }
+  }
+  &#{$line-two} {
+    .material-grid__bar { height: 68px; }
+  }
+
+  // order
+  &__icon--left {
+    .material-grid__bar--text {
+      @include flex-single-item(2);
+    }
+    .material-grid__bar--icon {
+      @include flex-single-item(1);
+      padding-right: 16px;
+    }
+  }
+  &__icon--right {
+    .material-grid__bar--text {
+      @include flex-single-item(1, 1);
+    }
+    .material-grid__bar--icon {
+      @include flex-single-item(2);
+    }
+  }
+
+  //bar position
+  &__bar--footer {
+    .material-grid__bar { bottom: 0; }
+  }
+  &__bar--header {
+    .material-grid__bar { top: 0; }
+  }
+}
