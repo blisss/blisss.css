@@ -56,6 +56,9 @@ $list-padding: 16px;
   $style-avatar:  selector-append(&, "__style--", $list-style-avatar);
   $style-all:     selector-append(&, "__style--", $list-style-all);
 
+  $icon-left:     selector-append(&, "__icon--left");
+  $icon-right:    selector-append(&, "__icon--right");
+
   $size-left:  72px - $list-padding;
   $size-right: 56px - $list-padding;
 
@@ -78,12 +81,24 @@ $list-padding: 16px;
   // order
   &#{$line-single}, &#{$line-two}, &#{$line-three} {
     &#{$style-icon} {
-      #{$icon} {
-        @include flex-single-item(1);
-        min-width: $size-left;
+      &#{$icon-left} {
+        #{$icon} {
+          @include flex-single-item(1);
+          min-width: $size-left;
+        }
+        #{$text} {
+          @include flex-single-item(2);
+        }
       }
-      #{$text} {
-        @include flex-single-item(2);
+      &#{$icon-right} {
+        #{$icon} {
+          @include flex-single-item(2);
+          min-width: $size-right;
+          padding-left: $list-padding;
+        }
+        #{$text} {
+          @include flex-single-item(1);
+        }
       }
     }
     &#{$style-avatar}, &#{$style-all} {
