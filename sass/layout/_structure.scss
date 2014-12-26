@@ -10,20 +10,25 @@ html, body {
   @include flex-single(flex-start, column wrap);
 }
 
-.material-container--horizontal {
-
-}
-// default
-.material-container--vertical {
-
-}
-
 .material-appbar {
-  min-height: 64px; min-width: 100%;
+  min-width: 100%;
 }
+.material-appbar__line {
+  min-height: 64px; min-width: 100%;
+  @include flex-single(space-between);
+}
+.material-appbar__container {
+  @include flex-single(flex-start);
+}
+.material-appbar__title {
+  @include typography(r, 16, white, 1, 1a);
+  padding-left: 24px;
+}
+
 
 .material-sidenav {
   @extend %fit;
+  pointer-events: none;
   &--left {
     .material-sidenav__container { left: 0; }
   }
@@ -31,6 +36,7 @@ html, body {
     .material-sidenav__container { right: 0; }
   }
   &--active {
+    pointer-events: auto;
     .material-sidenav__container {
       transform: translate(0, 0);
       @include transition(transform);
@@ -45,7 +51,7 @@ html, body {
   min-width: 256px; min-height: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   background-color: white;
   transform: translate(-100%, 0);
   @include transition(transform);
@@ -60,15 +66,14 @@ html, body {
 .material-sidenav__user-container {
   @include flex-single-item(1, 1, 1);
 }
-.material-sidenav__user-more {
+.material-sidenav__filter {
   @include flex-single-item(2);
   min-width: 24px; min-height: 24px;
   padding-left: 16px;
   @include flex-single();
+  .material-shape--triangle {
+    @include shape-triangle(5px, rgba(black, .54));
+  }
 }
 .material-sidenav__username { @include typography(m, 14, black, .54, 4a); }
 .material-sidenav__emall    { @include typography(r, 14, black, .54, 4b); }
-
-.material-shape--triangle {
-  @include shape-triangle(5px, rgba(black, .54));
-}

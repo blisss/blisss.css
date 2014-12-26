@@ -1,0 +1,11 @@
+$namespace: "icon";
+
+.#{$namespace} {
+  width: 48px; height: 48px;
+  @include flex-single();
+  cursor: pointer;
+  &__content {
+    width: 24px; height: 24px;
+    @include flex-single();
+  }
+}
