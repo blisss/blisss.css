@@ -1,0 +1,74 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.material-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  @include flex-single(flex-start, column wrap);
+}
+
+.material-container--horizontal {
+
+}
+// default
+.material-container--vertical {
+
+}
+
+.material-appbar {
+  min-height: 64px; min-width: 100%;
+}
+
+.material-sidenav {
+  @extend %fit;
+  &--left {
+    .material-sidenav__container { left: 0; }
+  }
+  &--right {
+    .material-sidenav__container { right: 0; }
+  }
+  &--active {
+    .material-sidenav__container {
+      transform: translate(0, 0);
+      @include transition(transform);
+    }
+    .material-bg {
+      background-color: rgba(black, .3);
+      @include transition(background-color);
+    }
+  }
+}
+.material-sidenav__container {
+  min-width: 256px; min-height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  transform: translate(-100%, 0);
+  @include transition(transform);
+}
+.material-sidenav__header {
+  padding: 16px 16px 8px;
+}
+.material-sidenav__user {
+  min-height: 56px !important;
+  @include flex-single(flex-start, row nowrap);
+}
+.material-sidenav__user-container {
+  @include flex-single-item(1, 1, 1);
+}
+.material-sidenav__user-more {
+  @include flex-single-item(2);
+  min-width: 24px; min-height: 24px;
+  padding-left: 16px;
+  @include flex-single();
+}
+.material-sidenav__username { @include typography(m, 14, black, .54, 4a); }
+.material-sidenav__emall    { @include typography(r, 14, black, .54, 4b); }
+
+.material-shape--triangle {
+  @include shape-triangle(5px, rgba(black, .54));
+}

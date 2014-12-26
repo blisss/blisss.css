@@ -1,0 +1,8 @@
+$namespace: "material-bg";
+
+.#{$namespace} {
+  @extend %fit;
+  pointer-events: none;
+  background-color: transparent;
+  @include transition(background-color);
+}

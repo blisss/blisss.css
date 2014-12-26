@@ -23,7 +23,7 @@ $button-type: "flat" "raised" "floating-action";
 
   &:hover {
     background-color: find-color(blue, "600");
-    .shadow { @extend %shadow--z#{2}; }
+    // .shadow { @extend %shadow--z#{2}; }
     @include transition(box-shadow, 0.28s, timing-function(0.4, 0, 0.2, 1));
   }
 

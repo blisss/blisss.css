@@ -1,0 +1,18 @@
+@mixin shape-size($width: 0, $height: 0) {
+  width: $width; height: $height;
+}
+
+@mixin shape-reset($width: 0) {
+  border-style: solid;
+  border-width: $width;
+}
+
+@mixin shape-triangle($size: 0, $color: black, $direction: bottom) {
+  @include shape-size();
+  @include shape-reset($size);
+
+  $color-list: (transparent transparent transparent transparent);
+  $direction-index: direction($direction, true);
+  border-color: #{set-nth($color-list, $direction-index, $color)};
+  margin-#{$direction}: -$size;
+}

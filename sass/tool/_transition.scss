@@ -10,9 +10,9 @@
 
 @function timing-keyword($keyword) {
 	$keyword: nth($keyword , 1);
-	$default: ease-out-in;
-	@if $keyword == eoi {
-		@return ease-out-in;
+	$default: ease-in-out;
+	@if $keyword == eio {
+		@return ease-in-out;
 	} @else if $keyword == ei {
 		@return ease-in;
 	} @else if $keyword == eo {
@@ -48,7 +48,7 @@
 
 @function timing-function($arguments...) {
 	$type: timing-type(length($arguments));
-	$default: "ease-out-in";
+	$default: "ease-in-out";
 	@if $type == "keyword" {
 		@return timing-keyword($arguments);
 	} @else if $type == "bezier" {
@@ -60,7 +60,7 @@
 	}
 }
 
-@mixin transition($property: all, $duration: 0.4s, $timing-function: timing-function(eoi), $delay: 0s) {
+@mixin transition($property: all, $duration: 0.4s, $timing-function: timing-function(eio), $delay: 0s) {
 	$transition-property: $property;
 	$transition-duration: $duration;
 	$transition-timing-function: $timing-function;

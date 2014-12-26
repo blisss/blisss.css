@@ -1,26 +1,31 @@
-$namespace: "typographic";
+$namespace: "typography";
 
+// font-family
 html {
   font-family: "Noto Sans CJK SC";
 }
 
+
+// font-weight
 %fwl { font-weight: 100; }
 %fwr { font-weight: 400; }
 %fwm { font-weight: 600; }
 
+// font-size
 $font-size: (12, 13, 14, 15, 16, 20, 24, 34, 45, 56, 112) !default;
-
 @each $size in $font-size {
   %fz#{$size} {
     font-size: #{$size}px;
   }
 }
 
+// font-color
 %fc87 { color: rgba(0, 0, 0, .87); }
 %fc54 { color: rgba(0, 0, 0, .54); }
 %fcw87 { color: rgba(255, 255, 255, .87); }
 %fcw54 { color: rgba(255, 255, 255, .54); }
 
+// line-height
 %fl4a { line-height: 1.4285em; }
 %fl4b { line-height: 1.7142em; }
 %fl3a { line-height: 1.5em; }
@@ -29,6 +34,29 @@ $font-size: (12, 13, 14, 15, 16, 20, 24, 34, 45, 56, 112) !default;
 %fl1a { line-height: 1.1764em; }
 %fl1b { line-height: 1.0667em; }
 %fl   { line-height: 1em; }
+
+@mixin typography-weight($weight: r) {
+  @extend %fw#{$weight};
+}
+@mixin typography-size($size: 14) {
+  @extend %fz#{$size};
+}
+@mixin typography-color($color: black, $alpha: .87) {
+  color: rgba($color, $alpha);
+}
+@mixin typography-line-height($line-height: null) {
+  @if $line-height == null {
+    @extend %fl;
+  } @else {
+    @extend %fl#{$line-height};
+  }
+}
+@mixin typography($weight: r, $size: 14, $color: black, $alpha: .87, $line-height: null) {
+  @include typography-weight($weight);
+  @include typography-size($size);
+  @include typography-color($color, $alpha);
+  @include typography-line-height($line-height);
+}
 
 .ty-button {
   @extend %fwm;
