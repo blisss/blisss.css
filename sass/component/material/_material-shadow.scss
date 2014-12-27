@@ -9,7 +9,7 @@ $shadow-zindex: (
 ) !default;
 
 @each $key, $value in $shadow-zindex {
-  %#{$namespace}--z#{$key} {
+  .#{$namespace}--z#{$key} {
     &:before 	{ box-shadow: map-get($value, top); }
     &:after 	{ box-shadow: map-get($value, bottom); }
   }
@@ -18,11 +18,11 @@ $shadow-zindex: (
 .#{$namespace} {
   @extend %fit;
   pointer-events: none;
-  @extend %#{$namespace}--z#{1} !optional;
+  @extend .#{$namespace}--z#{1} !optional;
 
   &:before, &:after {
     content: ' ';
     @extend %fit;
-    @include transition(box-shadow, 0.28s, timing-function(0.4, 0, 0.2, 1));
+    @include transition(box-shadow, 0.28s);
   }
 }

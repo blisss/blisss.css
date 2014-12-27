@@ -12,10 +12,15 @@ html, body {
 
 .material-appbar {
   min-width: 100%;
+  position: relative;
 }
 .material-appbar__line {
   min-height: 64px; min-width: 100%;
   @include flex-single(space-between);
+  & > .material-appbar__title {
+    padding-left: 72px !important;
+    @include typography(r, 34, white, .87, 1a);
+  }
 }
 .material-appbar__container {
   @include flex-single(flex-start);
@@ -27,33 +32,41 @@ html, body {
 
 
 .material-sidenav {
-  @extend %fit;
-  pointer-events: none;
+
   &--left {
-    .material-sidenav__container { left: 0; }
+    @extend %fit;
+    pointer-events: none;
+    .material-bg { pointer-events: none; }
+    .material-sidenav__container {
+      min-width: 256px;
+      left: 0;
+      z-index: 3;
+      transform: translate(-100%, 0);
+    }
+    &.material-sidenav--active {
+      .material-sidenav__container {
+        transform: translate(0, 0);
+        @include transition(transform);
+      }
+      .material-bg {
+        background-color: rgba(black, .3);
+        @include transition(background-color);
+        pointer-events: auto;
+      }
+    }
   }
   &--right {
-    .material-sidenav__container { right: 0; }
-  }
-  &--active {
-    pointer-events: auto;
     .material-sidenav__container {
-      transform: translate(0, 0);
-      @include transition(transform);
-    }
-    .material-bg {
-      background-color: rgba(black, .3);
-      @include transition(background-color);
+      right: 0;
+      z-index: 0;
     }
   }
 }
 .material-sidenav__container {
-  min-width: 256px; min-height: 100%;
+  min-height: 100%;
   position: fixed;
   top: 0;
-  z-index: 2;
   background-color: white;
-  transform: translate(-100%, 0);
   @include transition(transform);
 }
 .material-sidenav__header {
@@ -77,3 +90,14 @@ html, body {
 }
 .material-sidenav__username { @include typography(m, 14, black, .54, 4a); }
 .material-sidenav__emall    { @include typography(r, 14, black, .54, 4b); }
+
+
+
+
+
+
+
+.material-canvas {
+  @include flex-single-item(1, 1, 1);
+  min-width: 100%;
+}
