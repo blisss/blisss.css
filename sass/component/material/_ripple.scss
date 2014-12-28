@@ -1,0 +1,26 @@
+/**
+  Blisss Ripple
+
+  Ripple effect container.
+*/
+$namespace: "blisss-ripple";
+
+.#{$namespace} {
+
+  // reset and size
+  @extend %fit; pointer-events: none;
+  overflow: hidden;
+  &__waves { @extend %fit; pointer-events: none; }
+  &__con {
+    width: 100%; height: 100%;
+    position: absolute;
+    left: 0; top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  // color and alpha
+  %bgt { background-color: transparent; }
+  .blisss-bg { @extend %bgt; }
+  &__wave { @extend %bgt; }
+}

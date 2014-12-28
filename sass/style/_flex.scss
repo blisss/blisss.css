@@ -31,8 +31,22 @@ $align-items: ("center", "flex-start", "flex-end", "baseline", "stretch") !defau
   align-content: center;
   align-items: $items;
 }
+@mixin flex($justify: center, $flow: row nowarp, $items: center) {
+  display: flex;
+  flex-flow: $flow;
+  justify-content: $justify;
+  align-content: center;
+  align-items: $items;
+}
 
 @mixin flex-single-item($order: 0, $grow: 0, $shrink: 0, $basic: auto) {
   order: $order;
   flex: $grow $shrink $basic;
+}
+@mixin flex-item($justify: center, $flow: row nowarp, $items: center) {
+  display: flex;
+  flex-flow: $flow;
+  justify-content: $justify;
+  align-content: center;
+  align-items: $items;
 }

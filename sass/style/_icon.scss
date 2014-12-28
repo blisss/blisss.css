@@ -9,3 +9,20 @@ $namespace: "icon";
     @include flex-single();
   }
 }
+@font-face {
+  font-family: 'blisss';
+  src: url('./../font/blisss-action.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.ic {
+  display: inline-black;
+  font: normal normal normal 24px/1 blisss;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ic-loyalty:before {
+  content: '\e075';
+}

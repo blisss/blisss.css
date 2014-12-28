@@ -1,0 +1,23 @@
+.theme.dark {
+  // typography
+  [class^=tx-] { color: white; }
+
+  // button
+  .blisss-button {
+    &--flat {
+      color: rgba(white, 1);
+
+      &:hover     { background-color: rgba(#ccc, .15); }
+      &:active    { background-color: rgba(#ccc, .25); }
+      &[disabled] { color: rgba(white, .3); }
+    }
+    &--raised {
+      background-color: find-color(blue);
+      color: rgba(white, 1);
+
+      &:hover     { background-color: find-color(blue, 600); }
+      &:active    { background-color: find-color(blue, 700); }
+      &[disabled] { background-color: rgba(white, .12); color: rgba(white, .30); }
+    }
+  }
+}
