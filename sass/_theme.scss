@@ -1,7 +1,9 @@
-// button
-.blisss-button {
-  $theme: $primary-color;
-  .theme.#{$theme} & {
+.theme.dark {
+  // typography
+  [class^=tx-] { color: white; }
+
+  // button
+  .blisss-button {
     &--flat {
       color: rgba(white, 1);
 
@@ -10,11 +12,11 @@
       &[disabled] { color: rgba(white, .3); }
     }
     &--raised {
-      background-color: find-color($theme);
+      background-color: find-color(blue);
       color: rgba(white, 1);
 
-      &:hover     { background-color: find-color($theme, 600); }
-      &:active    { background-color: find-color($theme, 700); }
+      &:hover     { background-color: find-color(blue, 600); }
+      &:active    { background-color: find-color(blue, 700); }
       &[disabled] { background-color: rgba(white, .12); color: rgba(white, .30); }
     }
   }

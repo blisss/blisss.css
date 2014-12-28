@@ -1,0 +1,26 @@
+$namespace: "blisss-card";
+
+.#{$namespace} {
+  border-radius: 2px;
+  position: relative;
+  @include flex(center, column nowrap);
+
+  &__header {
+    min-width: 100%;
+    position: relative;
+    @include border-radius(top, inherit);
+    .tx-headline { padding: 16px; }
+  }
+  &__footer {
+    min-width: 100%; min-height: 48px;
+    @include flex(flex-start);
+  }
+  &__content {
+    min-width: 100%;
+    padding: 16px;
+  }
+
+  @at-root {
+    &__container { padding: 8px; }
+  }
+}

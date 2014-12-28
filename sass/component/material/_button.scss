@@ -18,18 +18,19 @@ $namespace: "blisss-button";
   // reset size and background
   @at-root {
     %rect {
-      min-width: 88px;
       height: 36px;
       padding: 0 8px;
       margin: 0 4px;
-      border-radius: 2px;
     }
     &--flat {
       @extend %rect;
+      min-width: 64px;
+      border-radius: 2px;
       background-color: transparent;
     }
     &--raised {
       @extend %rect;
+      min-width: 88px;
       background-color: white;
     }
     &--action {

@@ -10,4 +10,7 @@ $namespace: "blisss-bg";
   @extend %fit; pointer-events: none;
   background-color: transparent;
   @include transition(background-color);
+
+  overflow: hidden;
+  img { max-width: 100%; height: auto; }
 }
