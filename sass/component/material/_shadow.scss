@@ -1,0 +1,32 @@
+/**
+  Blisss Shadow.
+
+  The shadow of the element according to different heights is divided into five
+  stages.
+*/
+$namespace: "blisss-shadow";
+
+.#{$namespace} {
+  @extend %fit;
+  pointer-events: none;
+  &:before, &:after {
+    content: ' ';
+    @extend %fit;
+    @include transition(box-shadow, 0.28s);
+  }
+
+  $shadow: (
+    1: ( top: 0 2px 10px 0 rgba(0, 0, 0, 0.16), bottom: 0 2px 5px 0 rgba(0, 0, 0, 0.26) ),
+    2: ( top: 0 6px 20px 0 rgba(0, 0, 0, 0.19), bottom: 0 8px 17px 0 rgba(0, 0, 0, 0.2) ),
+    3: ( top: 0 17px 50px 0 rgba(0, 0, 0, 0.19), bottom: 0 12px 15px 0 rgba(0, 0, 0, 0.24) ),
+    4: ( top: 0 25px 55px 0 rgba(0, 0, 0, 0.21), bottom: 0 16px 28px 0 rgba(0, 0, 0, 0.22) ),
+    5: ( top: 0 40px 77px 0 rgba(0, 0, 0, 0.22), bottom: 0 27px 24px 0 rgba(0, 0, 0, 0.2) )
+  ) !default;
+
+  @each $k, $v in $shadow {
+    &--z#{$k} {
+      &:before 	{ box-shadow: map-get($v, top); }
+      &:after 	{ box-shadow: map-get($v, bottom); }
+    }
+  }
+}

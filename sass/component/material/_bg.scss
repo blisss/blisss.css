@@ -1,0 +1,13 @@
+/**
+  Blisss Background.
+
+  The shadow of the element according to different heights is divided into five
+  stages.
+*/
+$namespace: "blisss-bg";
+
+.#{$namespace} {
+  @extend %fit; pointer-events: none;
+  background-color: transparent;
+  @include transition(background-color);
+}
