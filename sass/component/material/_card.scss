@@ -1,18 +1,34 @@
 $namespace: "blisss-card";
 
 .#{$namespace} {
+
+  $padding: 4px;
+
+  margin: $padding;
   border-radius: 2px;
   position: relative;
-  @include flex(center, column nowrap);
+  //@include flex(center, column nowrap);
 
   &__header {
     min-width: 100%;
     position: relative;
     @include border-radius(top, inherit);
-    .tx-headline { padding: 16px; }
+    @include flex-item(0, 1, 1);
+    img {
+      @extend %fit;
+      position: relative;
+      width: 100%;
+      z-index: -1;
+    }
+    .tx-headline {
+      padding: 16px;
+      position: absolute;
+      bottom: 0;
+    }
   }
   &__footer {
     min-width: 100%; min-height: 48px;
+    @include border-radius(bottom, inherit);
     @include flex(flex-start);
   }
   &__content {
@@ -21,6 +37,9 @@ $namespace: "blisss-card";
   }
 
   @at-root {
-    &__container { padding: 8px; }
+    &__container {
+      padding: $padding;
+      @include flex(flex-start, row nowrap);
+    }
   }
 }
