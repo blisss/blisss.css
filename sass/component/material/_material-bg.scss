@@ -1,7 +1,0 @@
-$namespace: "material-bg";
-
-.#{$namespace} {
-  @extend %fit;
-  background-color: transparent;
-  @include transition(background-color);
-}
