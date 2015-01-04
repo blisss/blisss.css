@@ -3,43 +3,52 @@ $namespace: "blisss-card";
 .#{$namespace} {
 
   $padding: 4px;
+  @include flex-item(0, 1, 1, auto);
+  padding: $padding;
+  max-width: 25%;
 
-  margin: $padding;
-  border-radius: 2px;
-  position: relative;
-  //@include flex(center, column nowrap);
+  &__container {
+    border-radius: 2px;
+    position: relative;
+    // border-radius inherit
+    [class^="#{$namespace}"] {
+      & { @include border-radius(top, inherit); }
+      &:last-child { @include border-radius(bottom, inherit); }
+    }
+  }
 
+  // header
   &__header {
     min-width: 100%;
     position: relative;
-    @include border-radius(top, inherit);
-    @include flex-item(0, 1, 1);
     img {
       @extend %fit;
-      position: relative;
-      width: 100%;
-      z-index: -1;
+      position: relative; z-index: -1;
+      width: 100%; height: auto;
     }
     .tx-headline {
       padding: 16px;
-      position: absolute;
-      bottom: 0;
+      position: absolute; bottom: 0;
     }
   }
+
+  // footer action button group
   &__footer {
     min-width: 100%; min-height: 48px;
-    @include border-radius(bottom, inherit);
     @include flex(flex-start);
   }
+
+  // content
   &__content {
     min-width: 100%;
     padding: 16px;
   }
 
   @at-root {
-    &__container {
+    &__region {
       padding: $padding;
-      @include flex(flex-start, row nowrap);
+      @include flex(flex-start, row wrap, flex-start);
     }
   }
+
 }
