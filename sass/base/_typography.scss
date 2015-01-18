@@ -1,10 +1,41 @@
+/*------------------------------------*\
+    #Typography
+\*------------------------------------*/
+
 /**
   Typography CSS Style.
 
   Text layout related CSS is composed of 6 parts, which are font-family,
   font-size, font-weight, font-color, line-height and letter-spacing.
 */
-$namespace: "typography";
+$base-font-size:    $global-base-font-size !default;
+$base-line-height:  $global-base-line-height !default;
+$base-font-family:  $global-base-font-family !default;
+$base-heading-size: $global-base-heading-size !default;
+
+
+
+/**
+ * Set basic font-size;
+ */
+html {
+  font-size: $base-font-size;
+  @include respond-to(xx) { font-size: 15px; }
+  @include respond-to(xxx) { font-size: 16px; }
+
+  font-family: font-family(ncjk);
+  font-weight: 400;
+  color: rgba(black, .87);
+}
+
+
+/**
+ * Heading styles.
+ */
+@each $heading, $font-size in $base-heading-size {
+  #{$heading} { @include heading($font-size); }
+}
+
 
 /**
   Font family mixin.

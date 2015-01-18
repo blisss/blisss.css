@@ -18,16 +18,11 @@
  *  </div>
  */
 
-// Still use twelve grid build system.
-$layout-grid-columns: 12 !default;
-
-// Set simple gutter for every cell. There should be another size like
-// `tiny`, `small`, `large`, `huge`.
-$layout-grid-gutter: 12px !default;
-
-$layout-grid-enable-respond: true !default;
-$layout-grid-enable-span: true !default;
-$layout-grid-enable-offset: false !default;
+$layout-grid-columns:         $global-layout-grid-columns !default;
+$layout-grid-gutter:          $global-layout-grid-gutter !default;
+$layout-grid-enable-respond:  $global-layout-grid-enable-respond !default;
+$layout-grid-enable-span:     $global-layout-grid-enable-span !default;
+$layout-grid-enable-offset:   $global-layout-grid-enable-offset !default;
 
 /**
  * Row's Basic setting.
@@ -92,7 +87,24 @@ $layout-grid-enable-offset: false !default;
  * Responsive grid system. Include mixin `cell-size`.
  */
 @if $layout-grid-enable-respond {
+  $breakpoints: $global-breakpoints;
   @each $alias, $breakpoint in $breakpoints {
     @include respond-to($alias) { @include cell-size($alias); }
   }
+}
+
+/**
+ * Website use flexbox layout as a high level.
+ */
+.site {
+  @include flex(center);
+  height: 100%;
+}
+/**
+ * Content container defalut width for responsive layout.
+ */
+.container {
+  @include flex-item(1);
+  @include respond-to(xxx) { @include flex-item(960px); }
+  &--full { min-width: 100%; }
 }

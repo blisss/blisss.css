@@ -33,3 +33,15 @@
     @return $order;
   }
 }
+
+@function font-family($font-family: r) {
+  $return-font-family: null;
+  @if $font-family == r {
+    $return-font-family: join($return-font-family, "Roboto");
+  } @else if $font-family == ncjk {
+    $return-font-family: join($return-font-family, "Noto Sans CJK SC");
+  } @else {
+    $return-font-family: join($return-font-family, $font-family);
+  }
+  @return join($return-font-family, $base-font-family, $separator: comma);
+}
