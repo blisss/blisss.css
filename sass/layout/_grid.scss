@@ -1,0 +1,110 @@
+/*------------------------------------*\
+    #Grid
+\*------------------------------------*/
+
+
+/**
+ * The blisss grid system use css3 for flexbox layout alternative
+ * to the traditional grid system. Include flex mixins and functions.
+ *
+ * Version: 0.1.0
+ *
+ * Example:
+ *
+ *  <div class="layout">
+ *    <div class="layout__item span--4"></div>
+ *    <div class="layout__item span--4"></div>
+ *    <div class="layout__item span--4"></div>
+ *  </div>
+ */
+
+$layout-grid-columns:         $global-layout-grid-columns !default;
+$layout-grid-gutter:          $global-layout-grid-gutter !default;
+$layout-grid-enable-respond:  $global-layout-grid-enable-respond !default;
+$layout-grid-enable-span:     $global-layout-grid-enable-span !default;
+$layout-grid-enable-offset:   $global-layout-grid-enable-offset !default;
+
+/**
+ * Row's Basic setting.
+ *
+ * 1. Use flexbox dispaly.
+ * 2. Set wrap for Responsive grid.
+ * 3. Set cell simple gutter.
+ * 4. Align way for every cell.
+ */
+.layout {
+  @include flex(); /* [1] */
+  flex-wrap: wrap; /* [2] */
+  margin-left: -$layout-grid-gutter; /* [3] */
+
+  &.align {
+    &--top    { align-items: flex-position(start); } /* [4] */
+    &--center { align-items: flex-position(center); } /* [4] */
+    &--bottom { align-items: flex-position(end); } /* [4] */
+    &--full   { align-items: flex-position(full); } /* [4] */
+  }
+
+  &.gutter--none { margin-left: 0; } /* [5] */
+}
+
+/**
+ * Cell's Basic setting.
+ *
+ * 1. Default set cell is a auto grow unit if haven't set the width.
+ * 2. Set cell simple gutter.
+ * 3. Self align way. Maybe delete `align--top` like row.
+ */
+.layout__item {
+  @include flex-item(1); /* [1] */
+  padding-left: $layout-grid-gutter; /* [2] */
+
+  &.align {
+    &--top    { align-self: flex-position(start); } /* [3] */
+    &--center { align-self: flex-position(center); } /* [3] */
+    &--bottom { align-self: flex-position(end); } /* [3] */
+  }
+
+  .layout.gutter--none & { padding-left: 0; } /* [4] */
+}
+
+/**
+ * Width and offset for grid system. Enable `offset` switch for use.
+ */
+@mixin cell-size($name: null) {
+  @if $name { $name: "-#{$name}"; }
+  @for $i from 1 through $layout-grid-columns {
+    @if $layout-grid-enable-span {
+      .layout__item.span#{$name}--#{$i} { @include flex-item(percentage($i / $layout-grid-columns)); }
+    }
+    @if $layout-grid-enable-offset {
+      .layout__item.offset#{$name}--#{$i} { margin-left: percentage($i / $layout-grid-columns); }
+    }
+  }
+}
+@include cell-size();
+
+/**
+ * Responsive grid system. Include mixin `cell-size`.
+ */
+@if $layout-grid-enable-respond {
+  $breakpoints: $global-breakpoints;
+  @each $alias, $breakpoint in $breakpoints {
+    @include respond-to($alias) { @include cell-size($alias); }
+  }
+}
+
+/**
+ * Website use flexbox layout as a high level.
+ */
+.site {
+  @include flex(center);
+  height: 100%;
+}
+/**
+ * Content container defalut width for responsive layout.
+ */
+.container {
+  @include flex-item(1);
+  @include respond-to(xxx) { @include flex-item(960px); }
+  &--full { min-width: 100%; }
+}

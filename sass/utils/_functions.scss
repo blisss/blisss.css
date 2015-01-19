@@ -1,0 +1,47 @@
+@function flex-position($position) {
+  @if $position == start {
+    @return flex-start;
+  } @else if $position == end {
+    @return flex-end;
+  } @else if $position == full {
+    @return stretch;
+  } @else if $position == between {
+    @return space-between;
+  } @else {
+    @return $position;
+  }
+}
+
+@function flex-grow($grow) {
+  @if type-of($grow) == number {
+    @if unitless($grow) {
+      @return $grow 0 0;
+    } @else {
+      @return 0 0 $grow;
+    }
+  } @else {
+    @return $grow;
+  }
+}
+
+@function flex-order($order) {
+  @if $order == first {
+    @return -1;
+  } @else if $order == last {
+    @return 1000;
+  } @else {
+    @return $order;
+  }
+}
+
+@function font-family($font-family: r) {
+  $return-font-family: null;
+  @if $font-family == r {
+    $return-font-family: join($return-font-family, "Roboto");
+  } @else if $font-family == ncjk {
+    $return-font-family: join($return-font-family, "Noto Sans CJK SC");
+  } @else {
+    $return-font-family: join($return-font-family, $font-family);
+  }
+  @return join($return-font-family, $base-font-family, $separator: comma);
+}

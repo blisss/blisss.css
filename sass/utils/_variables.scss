@@ -1,0 +1,50 @@
+/*------------------------------------*\
+    #Default Variables
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Responsive
+\*------------------------------------*/
+/**
+ * Responsive breakpoints.
+ */
+$global-breakpoints: (
+  "xx":   600px,
+  "xxx":  992px
+) !global;
+
+
+/*------------------------------------*\
+    #Base
+\*------------------------------------*/
+/**
+ * Typography.
+ */
+$global-base-font-size: 14px !global;
+$global-base-line-height: 1.4 !global;
+$global-base-font-family: sans-serif !global;
+$global-base-heading-size: (
+  h1: 4.2rem,
+  h2: 3.56rem,
+  h3: 2.92rem,
+  h4: 2.28rem,
+  h5: 1.64rem,
+  h6: 1rem
+) !global;
+/*------------------------------------*\
+    #Layout
+\*------------------------------------*/
+/**
+ * Grid system.
+ */
+// Still use twelve grid build system.
+$global-layout-grid-columns: 12 !global;
+
+// Set simple gutter for every cell. There should be another size like
+// `tiny`, `small`, `large`, `huge`.
+$global-layout-grid-gutter: 12px !global;
+
+$global-layout-grid-enable-respond: true !global;
+$global-layout-grid-enable-span: true !global;
+$global-layout-grid-enable-offset: false !global;

@@ -1,13 +1,20 @@
-@import "tool/main";
-@import "reset/main";
+@import "utils/variables";
+@import "utils/functions";
+@import "utils/mixins";
+@import "utils/helpers";
+
+@import "base/reset";
+@import "base/typography";
 
 
-@import "setting";
+
+@import "layout/media";
+@import "layout/grid";
 
 
-@import "style/main";
-@import "component/main";
-@import "layout/main";
 
-
-@import "theme";
+// @import "tool/main";
+// @import "setting";
+// @import "style/main";
+// @import "component/main";
+// @import "theme";
