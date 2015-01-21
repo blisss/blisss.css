@@ -2,19 +2,14 @@
     #Typography
 \*------------------------------------*/
 
-/**
-  Typography CSS Style.
-
-  Text layout related CSS is composed of 6 parts, which are font-family,
-  font-size, font-weight, font-color, line-height and letter-spacing.
-*/
 $base-font-size:    $global-base-font-size !default;
 $base-line-height:  $global-base-line-height !default;
 $base-font-family:  $global-base-font-family !default;
 $base-heading-size: $global-base-heading-size !default;
 
-
-
+/*------------------------------------*\
+    #Basic style
+\*------------------------------------*/
 /**
  * Set basic font-size;
  */
@@ -24,10 +19,9 @@ html {
   @include respond-to(xxx) { font-size: 16px; }
 
   font-family: font-family(ncjk);
-  font-weight: 400;
+  font-weight: 300;
   color: rgba(black, .87);
 }
-
 
 /**
  * Heading styles.
@@ -36,285 +30,61 @@ html {
   #{$heading} { @include heading($font-size); }
 }
 
-
 /**
-  Font family mixin.
-
-  This mixin use google's `Noto Sans CJK SC` font default. You can type `n`, `r`
-  or any full name of font family names. And you can modify this mixin as your
-  custom mixin.
-
-  @mixin
-  @param {String} font family.
-*/
-@mixin tx-ff($family: n) {
-  @if $family == n {
-    font-family: "Noto Sans CJK SC";
-  } @else if $family == r {
-    font-family: "Roboto";
-  } @else {
-    font-family: $family;
+ * A
+ */
+a {
+  text-decoration: none;
+  @at-root {
+    #{heading-name(&)} {
+      font-size: inherit;
+      font-weight: inherit;
+      font-style: inherit;
+      color: inherit;
+    }
   }
 }
 
-/**
-  All font use `Noto Sans CJK SC` default.
-*/
-html { @include tx-ff(); }
 
 /**
-  Font weight mixin.
-
-  Quick set font-weight of css property. Types `r`, `l` or `w`.
-
-  @mixin
-  @param {String} weight value.
-*/
-@mixin tx-fw($weight: r) {
-  @if $weight == r {
-    font-weight: 400;
-  } @else if $weight == l {
-    font-weight: 100;
-  } @else if $weight == m {
-    font-weight: 600;
-  } @else {
-    font-weight: $weight;
+ * Export helper Mixin.
+ */
+@mixin export-helper($map, $block, $property) {
+  @each $modifier, $value in $map {
+    .#{$block}--#{$modifier} {
+      #{$property}: $value;
+    }
   }
 }
-
-/**
-  Line height mixin.
-
-  text line height always larger than 0.1 em. set body, subheader, headline and
-  display 1x ~ 2x line height. default use 1 em.
-
-  body      use `1`
-  subhead   use `2`
-  headline  use `3`
-  display   use `4`
-
-  @mixin
-  @param {String} line height value.
-*/
-@mixin tx-lh($line-height: 1em) {
-  @if $line-height == 1 {
-    line-height: 1.1764em;
-  } @else if $line-height == 2 {
-    line-height: 1.3333em;
-  } @else if $line-height == 3 {
-    line-height: 1.5em;
-  } @else if $line-height == 4 {
-    line-height: 1.4285em;
-  } @else {
-    line-height: $line-height;
-  }
-}
-
-/**
-  this mixin used to set font styles.
-
-  @mixin
-  @param {String} mixin tx-fw() options.
-  @param {String} font size value.
-  @param {String} mixin tx-lh() options.
-  @param {String} font color name and alpha value.
-  @param {String} mixin tx-ff() options.
-*/
-@mixin tx($fw: r, $fz: 14px, $lh: 1em, $c: black .87, $ff: null) {
-  @include tx-fw($fw);
-  @include tx-lh($lh);
-  @if $ff != null {
-    @include tx-ff($ff);
-  }
-  font-size: $fz;
-  color: rbga($c);
-}
-
-/**
-  useful font styles
-*/
-.tx-body, .tx-b {
-  font-size: 14px;
-  @include tx-fw();
-  @include tx-lh(1);
-  color: rgba(black, .87);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-subhead, .tx-sh {
-  font-size: 16px;
-  @include tx-fw();
-  @include tx-lh(2);
-  color: rgba(black, .87);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-headline, .tx-hl {
-  font-size: 24px;
-  @include tx-fw();
-  @include tx-lh(3);
-  color: rgba(black, .87);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-title, .tx-t {
-  font-size: 20px;
-  @include tx-fw(m);
-  @include tx-lh();
-  color: rgba(black, .87);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-button, .tx-btn {
-  font-size: 14px;
-  @include tx-fw(m);
-  @include tx-lh();
-  color: rgba(black, .87);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-caption, .tx-c {
-  font-size: 12px;
-  @include tx-fw();
-  @include tx-lh();
-  color: rgba(black, .54);
-  &--dark { color: rgba(white, 1); }
-}
-
-%tx-display {
-  @include tx-fw();
-  @include tx-lh(4);
-  color: rgba(black, .54);
-  &--dark { color: rgba(white, 1); }
-}
-.tx-d1 { font-size: 34px;   @extend %tx-display; }
-.tx-d2 { font-size: 45px;   @extend %tx-display; }
-.tx-d3 { font-size: 56px;   @extend %tx-display; }
-.tx-d4 { font-size: 112px;  @extend %tx-display; }
-
-
-
-
-// font-weight
-%fwl { font-weight: 100; }
-%fwr { font-weight: 400; }
-%fwm { font-weight: 600; }
-
-// font-size
-$font-size: (12, 13, 14, 15, 16, 20, 24, 34, 45, 56, 112) !default;
-@each $size in $font-size {
-  %fz#{$size} {
-    font-size: #{$size}px;
-  }
-}
-
-// font-color
-%fc87 { color: rgba(0, 0, 0, .87); }
-%fc54 { color: rgba(0, 0, 0, .54); }
-%fcw87 { color: rgba(255, 255, 255, .87); }
-%fcw54 { color: rgba(255, 255, 255, .54); }
-
-// line-height
-%fl4a { line-height: 1.4285em; }
-%fl4b { line-height: 1.7142em; }
-%fl3a { line-height: 1.5em; }
-%fl3b { line-height: 1.75em; }
-%fl2  { line-height: 1.3333em; }
-%fl1a { line-height: 1.1764em; }
-%fl1b { line-height: 1.0667em; }
-%fl   { line-height: 1em; }
-
-@mixin typography-weight($weight: r) {
-  @extend %fw#{$weight};
-}
-@mixin typography-size($size: 14) {
-  @extend %fz#{$size};
-}
-@mixin typography-color($color: black, $alpha: .87) {
-  color: rgba($color, $alpha);
-}
-@mixin typography-line-height($line-height: null) {
-  @if $line-height == null {
-    @extend %fl;
-  } @else {
-    @extend %fl#{$line-height};
-  }
-}
-@mixin typography($weight: r, $size: 14, $color: black, $alpha: .87, $line-height: null) {
-  @include typography-weight($weight);
-  @include typography-size($size);
-  @include typography-color($color, $alpha);
-  @include typography-line-height($line-height);
-}
-
-.ty-button {
-  @extend %fwm;
-  @extend %fz14;
-  @extend %fc87;
-  @extend %fl;
-}
-
-.ty-caption {
-  @extend %fwr;
-  @extend %fz12;
-  @extend %fc54;
-  @extend %fl;
-}
-
-.ty-body1 {
-  @extend %fwr;
-  @extend %fz14;
-  @extend %fc87;
-  @extend %fl4a;
-}
-
-.ty-body2 {
-  @extend %fwm;
-  @extend %fz14;
-  @extend %fc87;
-  @extend %fl4b;
-}
-
-.ty-subhead {
-  @extend %fwr;
-  @extend %fz16;
-  @extend %fc87;
-  @extend %fl3a;
-}
-
-.ty-title {
-  @extend %fwm;
-  @extend %fz20;
-  @extend %fc87;
-  @extend %fl;
-}
-
-.ty-headline {
-  @extend %fwr;
-  @extend %fz24;
-  @extend %fc87;
-  @extend %fl2;
-}
-
-.ty-display1x {
-  @extend %fwr;
-  @extend %fz34;
-  @extend %fc54;
-  @extend %fl1a;
-}
-
-.ty-display2x {
-  @extend %fwr;
-  @extend %fz45;
-  @extend %fc54;
-  @extend %fl1b;
-}
-
-.ty-display3x {
-  @extend %fwr;
-  @extend %fz56;
-  @extend %fc54;
-  @extend %fl;
-}
-
-.ty-display4x {
-  @extend %fwl;
-  @extend %fz112;
-  @extend %fc54;
-  @extend %fl;
-}
+$text-weight: (
+  "light": 100,
+  "normal": 300,
+  "bold": 500
+);
+$text-size: (
+  "small": 12px,
+  "normal": 14px,
+  "more": 16px,
+  "large": 20px,
+  "great": 24px,
+  "1x": 34px,
+  "2x": 45px,
+  "3x": 56px,
+  "4x": 112px
+);
+$text-color: (
+  "dim": rgba(black, .54),
+  "dark": rgba(black, .87),
+  "bright": rgba(white, .54),
+  "light": rgba(white, .87)
+);
+$text-line-height: (
+  "base": 1rem,
+  "high": 1.1764rem,
+  "higher": 1.3333rem,
+  "hightest": 1.5rem,
+);
+@include export-helper($text-weight, weight, font-weight);
+@include export-helper($text-size, size, font-size);
+@include export-helper($text-color, color, color);
+@include export-helper($text-line-height, line-height, line-height);
