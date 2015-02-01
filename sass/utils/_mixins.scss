@@ -1,20 +1,3 @@
-@mixin flex($items: null, $justify: null) {
-  display: flex;
-  flex-wrap: wrap;
-  @if $justify { justify-content: flex-position($justify); }
-  @if $items { justify-content: flex-position($items); }
-}
-
-@mixin flex-item($grow: null, $order: null) {
-  flex: flex-grow($grow);
-  @if $order { order: flex-order($order); }
-}
-@mixin respond-to($breakpoint: null) {
-  $breakpoints: $global-breakpoints;
-  @media (min-width: inspect(map-get($breakpoints, $breakpoint))) {
-    @content;
-  }
-}
 @mixin heading($font-size) {
   font-size: $font-size;
   font-weight: inherit;

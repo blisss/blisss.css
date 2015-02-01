@@ -15,8 +15,8 @@ $base-heading-size: $global-base-heading-size !default;
  */
 html {
   font-size: $base-font-size;
-  @include respond-to(xx) { font-size: 15px; }
-  @include respond-to(xxx) { font-size: 16px; }
+  // @include respond-to(xx) { font-size: 15px; }
+  // @include respond-to(xxx) { font-size: 16px; }
 
   font-family: font-family(ncjk);
   font-weight: 300;

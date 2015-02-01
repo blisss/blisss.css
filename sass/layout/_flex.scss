@@ -1,0 +1,57 @@
+/*------------------------------------*\
+    #FLEX
+\*------------------------------------*/
+
+/**
+ * Flex position quick setting.
+ *
+ * @Function
+ *
+ * @param {Number} $position - values: `start` `end` `between`. Default `stretch`.
+ *
+ * @return {String}
+ */
+@function flex-position($position) {
+  @if $position == start {
+    @return flex-start;
+  } @else if $position == end {
+    @return flex-end;
+  } @else if $position == between {
+    @return space-between;
+  } @else {
+    @return $position;
+  }
+}
+
+@function flex-grow($grow) {
+  @if type-of($grow) == number {
+    @if unitless($grow) {
+      @return $grow 0 0;
+    } @else {
+      @return 0 0 $grow;
+    }
+  } @else {
+    @return $grow;
+  }
+}
+
+@function flex-order($order) {
+  @if $order == first {
+    @return -1;
+  } @else if $order == last {
+    @return 1000;
+  } @else {
+    @return $order;
+  }
+}
+@mixin flex($items: null, $justify: null) {
+  display: flex;
+  flex-wrap: wrap;
+  @if $justify { justify-content: flex-position($justify); }
+  @if $items { justify-content: flex-position($items); }
+}
+
+@mixin flex-item($grow: null, $order: null) {
+  flex: flex-grow($grow);
+  @if $order { order: flex-order($order); }
+}

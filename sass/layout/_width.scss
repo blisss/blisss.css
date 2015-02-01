@@ -1,0 +1,61 @@
+/*------------------------------------*\
+    #WIDTH
+\*------------------------------------*/
+
+/**
+ * Read Global Variables.
+ */
+$blisss-enable-export-width: $blisss-global-enable-export-width;
+$blisss-enable-export-responsive-width: $blisss-global-enable-responsive;
+
+/**
+ * Export width class with media query.
+ *
+ * @Mixin
+ */
+@mixin export-responsive-width($breakpoint) {
+  @include make-response($breakpoint) {
+    @include make-width("-#{$breakpoint}");
+  }
+}
+
+/**
+ * Calculate the width for grid system.
+ *
+ * @Mixin
+ */
+@mixin make-width($classname: null) {
+  @for $width from 1 through 12 {
+    .width#{$classname}--#{$width} {
+      @if $blisss-grid-type == "flex" {
+        @include flex-item(percentage($width / 12));
+      } @else {
+        width: percentage($width / 12);
+      }
+    }
+  }
+}
+
+/**
+ * Export width class.
+ *
+ * @Mixin
+ */
+@mixin export-width() {
+  @if $blisss-enable-export-width {
+    @include make-width();
+
+    @if $blisss-enable-export-responsive-width {
+      @include export-responsive-width("x");
+      @include export-responsive-width("xx");
+    }
+  }
+}
+
+/**
+ * Export width class.
+ *
+ * example:
+ * <div class="layout__item width--12 width-x--3 width-xx-4">
+ */
+@include export-width();

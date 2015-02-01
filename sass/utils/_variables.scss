@@ -1,19 +1,7 @@
 /*------------------------------------*\
     #Default Variables
 \*------------------------------------*/
-
-
-/*------------------------------------*\
-    #Responsive
-\*------------------------------------*/
-/**
- * Responsive breakpoints.
- */
-$global-breakpoints: (
-  "xx":   600px,
-  "xxx":  992px
-) !global;
-
+$sys-perfix: "blisss";
 
 /*------------------------------------*\
     #Base
@@ -32,9 +20,41 @@ $global-base-heading-size: (
   h5: 1.64rem,
   h6: 1rem
 ) !global;
+
 /*------------------------------------*\
     #Layout
 \*------------------------------------*/
+
+/**
+ * Response flag.
+ */
+$blisss-global-enable-responsive: true !global;
+
+/**
+ * Breakpoints definition.
+ *
+ * 1. small name.
+ * 2. medium name.
+ * 3. large name.
+ */
+$blisss-global-small-breakpoint-name:   "x" !global; /* [1] */
+$blisss-global-medium-breakpoint-name:  "xx" !global; /* [2] */
+$blisss-global-large-breakpoint-name:   "xxx" !global; /* [3] */
+
+$blisss-global-breakpoints: (
+  "#{$blisss-global-small-breakpoint-name}":    320px,
+  "#{$blisss-global-medium-breakpoint-name}":   768px
+) !global;
+
+/**
+ * Width flag.
+ */
+$blisss-global-enable-export-width: true !global;
+$blisss-global-enable-export-responsive-width: $blisss-global-enable-responsive !global;
+
+
+
+
 /**
  * Grid system.
  */
