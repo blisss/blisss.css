@@ -75,7 +75,7 @@
   display: flex;
   flex-wrap: wrap;
   @if $justify { justify-content: flex-position($justify); }
-  @if $items { justify-content: flex-position($items); }
+  @if $items { align-items: flex-position($items); }
 }
 
 /**
