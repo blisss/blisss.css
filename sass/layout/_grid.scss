@@ -17,7 +17,6 @@ $blisss-grid-align: (
 );
 $blisss-grid-container-large-width: 960px;
 $blisss-grid-container-alias: "con";
-$blisss-grid-layout-alias: "row";
 
 /**
  * Container styles.
@@ -26,14 +25,12 @@ $blisss-grid-layout-alias: "row";
  *
  * Example:
  * <div class="container"></div>
+ * <div class="container container--full"></div>
  *
  * 1. center for screen.
  * 2. default set 100% width.
  * 3. set 960px for desktop web page.
  * 4. use `container--full` class to set 100% width.
- *
- * Example:
- * <div class="container container--full"></div>
  */
 .container, .#{$blisss-grid-container-alias} {
   @extend %space-center; /* [1] */
@@ -66,7 +63,7 @@ $blisss-grid-layout-alias: "row";
   @if $blisss-grid-type == "float" {
     @extend %clearfix; /* [2] */
   } @else {
-    display: flex; /* [3] */
+    @include flex() /* [3] */
   }
 
   margin-left: -$blisss-grid-gutter-base; /* [4] */
@@ -109,11 +106,11 @@ $blisss-grid-layout-alias: "row";
  *
  * @param {String} $namespace
  */
-@mixin make-gutter($namespace) {
+@mixin export-gutter($namespace) {
  @each $name, $value in $blisss-grid-gutter {
-   #{$namespace}.gutter--#{$name} {
+   .#{$namespace}.gutter--#{$name} {
      margin-left: -$value;
-     > #{$namespace}__item {
+     > .#{$namespace}__item {
        padding-left: $value;
      }
    }
@@ -129,7 +126,7 @@ $blisss-grid-layout-alias: "row";
  * <div class="layout__item gutter--none"><div>
  * <div class="layout__item gutter--small"><div>
  */
-@include make-gutter("layout");
+@include export-gutter("layout");
 
 /**
  * Vertical align for flex layout grid.
@@ -139,7 +136,7 @@ $blisss-grid-layout-alias: "row";
  * @param {String} - $namespace
  * @param {String} - $property
  */
-@mixin make-align($namespace, $property) {
+@mixin export-align($namespace, $property) {
   .#{$namespace}.align {
     @each $name, $value in $blisss-grid-align {
       &--#{$name} { #{$property}: flex-position($value); }
@@ -158,6 +155,6 @@ $blisss-grid-layout-alias: "row";
  * <div class="layout__item align--center"></div>
  */
 @if $blisss-grid-type == "flex" {
-  @include make-align("layout", align-items);
-  @include make-align("layout__item", align-self);
+  @include export-align("layout", align-items);
+  @include export-align("layout__item", align-self);
 }

@@ -23,6 +23,15 @@
   }
 }
 
+/**
+ * Flex grow quick setting.
+ *
+ * @Function
+ *
+ * @param {Number} $grow - set value `0 0 basic` if the arguments with unit
+ *
+ * @return {List}
+ */
 @function flex-grow($grow) {
   @if type-of($grow) == number {
     @if unitless($grow) {
@@ -35,6 +44,15 @@
   }
 }
 
+/**
+ * Flex order quick setting.
+ *
+ * @Function
+ *
+ * @param {Number} $order
+ *
+ * @return {Number}
+ */
 @function flex-order($order) {
   @if $order == first {
     @return -1;
@@ -44,6 +62,15 @@
     @return $order;
   }
 }
+
+/**
+ * Flex layout.
+ *
+ * @Mixin
+ *
+ * @param {String} $items
+ * @param {String} $justify
+ */
 @mixin flex($items: null, $justify: null) {
   display: flex;
   flex-wrap: wrap;
@@ -51,6 +78,14 @@
   @if $items { justify-content: flex-position($items); }
 }
 
+/**
+ * Flex item.
+ *
+ * @Mixin
+ *
+ * @param {Number|List} $grow
+ * @param {Number} $order
+ */
 @mixin flex-item($grow: null, $order: null) {
   flex: flex-grow($grow);
   @if $order { order: flex-order($order); }

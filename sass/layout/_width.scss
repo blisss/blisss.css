@@ -12,6 +12,8 @@ $blisss-enable-export-responsive-width: $blisss-global-enable-responsive;
  * Export width class with media query.
  *
  * @Mixin
+ *
+ * @param {Number} $breakpoint
  */
 @mixin export-responsive-width($breakpoint) {
   @include make-response($breakpoint) {
@@ -23,6 +25,8 @@ $blisss-enable-export-responsive-width: $blisss-global-enable-responsive;
  * Calculate the width for grid system.
  *
  * @Mixin
+ *
+ * @param {String} $classname - responsive breakpoint names
  */
 @mixin make-width($classname: null) {
   @for $width from 1 through 12 {
@@ -32,6 +36,11 @@ $blisss-enable-export-responsive-width: $blisss-global-enable-responsive;
       } @else {
         width: percentage($width / 12);
       }
+    }
+  }
+  @for $width from 0 through 11 {
+    .offset#{$classname}--#{$width} {
+      margin-left: percentage($width / 12);
     }
   }
 }
@@ -55,7 +64,8 @@ $blisss-enable-export-responsive-width: $blisss-global-enable-responsive;
 /**
  * Export width class.
  *
- * example:
+ * Example:
  * <div class="layout__item width--12 width-x--3 width-xx-4">
+ * <div class="layout__item width--3 offset-x--3">
  */
 @include export-width();
