@@ -31,6 +31,7 @@ $blisss-grid-container-alias: "con";
  * 2. default set 100% width.
  * 3. set 960px for desktop web page.
  * 4. use `container--full` class to set 100% width.
+ * 5. set padding offset headling margin.
  */
 .container, .#{$blisss-grid-container-alias} {
   @extend %space-center; /* [1] */
@@ -38,6 +39,7 @@ $blisss-grid-container-alias: "con";
   @include make-response(xx)  { max-width: $blisss-grid-container-large-width; }
   /* [3] */
   &--full { min-width: 100%; } /* [4] */
+  padding: 1em; /* [5] */
 }
 
 /**

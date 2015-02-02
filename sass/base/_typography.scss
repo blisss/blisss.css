@@ -7,43 +7,161 @@ $base-line-height:  $global-base-line-height !default;
 $base-font-family:  $global-base-font-family !default;
 $base-heading-size: $global-base-heading-size !default;
 
+$blisss-font-size: 13px;
+$blisss-line-height: 1.5;
+$blisss-background-color: #ECF0F1;
+$blisss-heading-size: (
+  h1: 2.57em,
+  h2: 2.14em,
+  h3: 1.71em,
+  h4: 1.43em,
+  h5: 1.14em,
+  h6: 1em
+);
+
+
 /*------------------------------------*\
     #Basic style
 \*------------------------------------*/
+
+/**
+ * Font family function.
+ *
+ * This mixin use google's `Noto Sans CJK SC` font default. You can type `n`, `r`
+ * or any full name of font family names. And you can modify this mixin as your
+ * custom mixin.
+ *
+ * @Function
+ *
+ * @param {String} $font-family - font family.
+ */
+@function font-family($font-family: "r") {
+  $return-font-family: null;
+  @if $font-family == "r" {
+    $return-font-family: join($return-font-family, "Roboto");
+  } @else if $font-family == "ncjk" {
+    $return-font-family: join($return-font-family, "Noto Sans CJK SC");
+  } @else {
+    $return-font-family: join($return-font-family, $font-family);
+  }
+  @return join($return-font-family, $base-font-family, $separator: comma);
+}
+
 /**
  * Set basic font-size;
  */
 html {
-  font-size: $base-font-size;
-  // @include respond-to(xx) { font-size: 15px; }
-  // @include respond-to(xxx) { font-size: 16px; }
+  font-size: $blisss-font-size;
+  line-height: $blisss-line-height;
+  @include make-response(x)  { font-size: 14px; }
+  @include make-response(xx) { font-size: 15px; }
 
-  font-family: font-family(ncjk);
+  font-family: font-family("ncjk");
   font-weight: 300;
   color: rgba(black, .87);
+  background-color: $blisss-background-color;
+
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
 }
+
+body { min-height: 100%; }
+
+
+@function heading-name($el) {
+  $heading-names: "";
+  $heading-name-str: "";
+  @for $heading from 1 through 6 {
+    @if $el {
+      $heading-name-str: "h#{$heading} #{$el},";
+    } @else {
+      $heading-name-str: "h#{$heading},";
+    }
+    $heading-names: $heading-names + $heading-name-str;
+  }
+  @return str-slice($heading-names, 1, -2);
+}
+
+@mixin heading($font-size) {
+  font-size: $font-size;
+  font-weight: inherit;
+  line-height: 1.05;
+  margin: .5 * $font-size / 2 0 .4 * $font-size / 2;
+  @content;
+}
+
 
 /**
  * Heading styles.
  */
-@each $heading, $font-size in $base-heading-size {
-  #{$heading} { @include heading($font-size); }
+@each $heading, $font-size in $blisss-heading-size {
+  #{$heading}, .#{$heading} { @include heading($font-size); }
 }
 
 /**
- * A
+ *
  */
-a {
-  text-decoration: none;
-  @at-root {
-    #{heading-name(&)} {
-      font-size: inherit;
-      font-weight: inherit;
-      font-style: inherit;
-      color: inherit;
-    }
+p {
+  margin-bottom: .8em;
+
+  &.lead {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+
+  &.responsive {
+    font-size: .85em;
+    @include make-response(x)  { font-size: 1em; }
+    @include make-response(xx) { font-size: 1.25em; }
   }
 }
+
+/**
+ *
+ */
+blockquote {
+  > p { margin-bottom: 0; }
+  border-left: 4px solid $blisss-primary-color;
+  font-size: 1.05em;
+  padding: 0.35em 1.25em;
+  margin: 1.2em 0;
+}
+
+/**
+ *
+ */
+code {
+  color: $blisss-primary-color;
+  background-color: #efefef;
+  padding: 0px 5px;
+  font-weight: 500;
+  border-radius: 2px;
+  font-family: font-family();
+  margin: 0 2px;
+}
+
+
+
+// /**
+//  * A
+//  */
+// a {
+//   text-decoration: none;
+//   @at-root {
+//     #{heading-name(&)} {
+//       font-size: inherit;
+//       font-weight: inherit;
+//       font-style: inherit;
+//       color: inherit;
+//     }
+//   }
+// }
 
 
 /**

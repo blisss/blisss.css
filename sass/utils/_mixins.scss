@@ -1,7 +1,0 @@
-@mixin heading($font-size) {
-  font-size: $font-size;
-  font-weight: inherit;
-  line-height: 1.02 * $font-size;
-  margin: .5 * $font-size 0 .4 * $font-size;
-  @content;
-}
