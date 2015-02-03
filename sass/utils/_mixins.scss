@@ -1,0 +1,10 @@
+@mixin border-radius($direction, $value) {
+  $h: top, bottom;
+  $v: left, right;
+  $i: direction($direction);
+  @if $i % 2 != 0 {
+    @each $d in $v { border-#{$direction}-#{$d}-radius: $value; }
+  } @else {
+    @each $d in $h { border-#{$d}-#{$direction}-radius: $value; }
+  }
+}
