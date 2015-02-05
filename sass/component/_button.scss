@@ -17,6 +17,7 @@
   &:before, &:after {
     content: '';
     @extend %fit;
+    pointer-events: none;
   }
   &:before { box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16); }
   &:after  { box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
@@ -69,13 +70,7 @@
     }
   }
   &.border { @include button-type("border"); }
-  // &.border.state--success { @include button-type("border", find-color("light-green")); }
-  // &.border.state--warning { @include button-type("border", find-color("amber")); }
-  // &.border.state--danger  { @include button-type("border", find-color("red")); }
   &.flat { @include button-type(); }
-  // &.border.state--success { @include button-type("flat", find-color("light-green")); }
-  // &.border.state--warning { @include button-type("flat", find-color("amber")); }
-  // &.border.state--danger  { @include button-type("flat", find-color("red")); }
 
   /**
    * Button with icon
@@ -104,7 +99,6 @@
       &.size--small .button__icon { padding: 4px 0; }
       &.size--large .button__icon { padding: 8px 0; }
     }
-
   }
   &.icon--only {
     min-width: 40px; height: 40px;
@@ -114,47 +108,54 @@
     font-size: 1.5em;
   }
 
+  /**
+   *
+   */
+  &:hover {
 
-
-
-  // reset size and background
-  @at-root {
-    %rect {
-      height: 36px;
-      padding: 0 8px;
-      margin: 0 4px;
-    }
-    &--flat {
-      @extend %rect;
-      min-width: 64px;
-      border-radius: 2px;
-      background-color: transparent;
-    }
-    &--raised {
-      @extend %rect;
-      min-width: 88px;
-      background-color: white;
-    }
-    &--floating {
-      background-color: find-color(pink, a700);
-      border-radius: 50%;
-      width: 40px; height: 40px;
-      &.large { width: 56px; height: 56px; }
-      .blisss-button__content {
-        color: white; @include flex();
-      }
-    }
   }
 
-  // states
-  @at-root {
-    &--flat {
-      &:hover     { background-color: rgba(#999, .2); }
-      &:active    { background-color: rgba(#999, .4); }
-      &[disabled] { color: rgba(black, .26); }
-    }
-    &--raised {
-      &[disabled] { background-color: rgba(black, .12); color: rgba(black, .26); }
-    }
-  }
+
+
+
+  // // reset size and background
+  // @at-root {
+  //   %rect {
+  //     height: 36px;
+  //     padding: 0 8px;
+  //     margin: 0 4px;
+  //   }
+  //   &--flat {
+  //     @extend %rect;
+  //     min-width: 64px;
+  //     border-radius: 2px;
+  //     background-color: transparent;
+  //   }
+  //   &--raised {
+  //     @extend %rect;
+  //     min-width: 88px;
+  //     background-color: white;
+  //   }
+  //   &--floating {
+  //     background-color: find-color(pink, a700);
+  //     border-radius: 50%;
+  //     width: 40px; height: 40px;
+  //     &.large { width: 56px; height: 56px; }
+  //     .blisss-button__content {
+  //       color: white; @include flex();
+  //     }
+  //   }
+  // }
+  //
+  // // states
+  // @at-root {
+  //   &--flat {
+  //     &:hover     { background-color: rgba(#999, .2); }
+  //     &:active    { background-color: rgba(#999, .4); }
+  //     &[disabled] { color: rgba(black, .26); }
+  //   }
+  //   &--raised {
+  //     &[disabled] { background-color: rgba(black, .12); color: rgba(black, .26); }
+  //   }
+  // }
 }

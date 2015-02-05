@@ -1,0 +1,32 @@
+
+
+@function trans-timing($timing) {
+  @if type-of($timing) == "string" {
+    @return unquote($timing);
+  } @else {
+    $timing: join($timing, (), comma);
+    @return cubic-bezier($timing);
+  }
+}
+
+@function trans($property: all, $duration: 0.28s, $easing: ease-in-out, $delay: 0s) {
+  $out: ();
+  $out: join($out, $property, space);
+  $out: join($out, $duration, space);
+  $out: join($out, $easing, space);
+  $out: join($out, $delay, space);
+  @return $out;
+}
+
+@mixin transition($perfix: false, $values...) {
+  @if $perfix {
+    @include perfix(transition, $values);
+  } @else {
+    transition: $values;
+  }
+}
+
+@mixin transition-simple($value: null) {
+  @if $value { @include transition(false, trans($value)); }
+  @else { @include transition(false, trans()); }
+}

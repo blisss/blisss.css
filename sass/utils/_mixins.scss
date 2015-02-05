@@ -8,3 +8,15 @@
     @each $d in $h { border-#{$d}-#{$direction}-radius: $value; }
   }
 }
+
+@mixin perfix($property, $value, $is-property: true) {
+  @if $is-property {
+    -webkit-#{$property}: $value;
+       -moz-#{$property}: $value;
+            #{$property}: $value;
+  } @else {
+    $property: -webkit-#{$value};
+    $property:    -moz-#{$value};
+    $property:         #{$value};
+  }
+}
