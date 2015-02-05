@@ -1,0 +1,59 @@
+/*------------------------------------*\
+    #RESPONSIVE
+\*------------------------------------*/
+
+/**
+ * Parses a breakpoint to the media query expression.
+ *
+ * @Function
+ *
+ * @param {Number} $breakpoint1
+ * @param {Number} $breakpoint2 - return both min-width and max-width if
+ * provide the second breakpoint. Default `null`.
+ *
+ * @return {String}
+ */
+@function parse-query-expression($breakpoint1, $breakpoint2) {
+  $min-width: "only screen and (min-width: #{$breakpoint1})";
+  @if $breakpoint2 {
+    $breakpoint2: $breakpoint2 - 1;
+    @return "#{$min-width} and (max-width: #{$breakpoint2})";
+  } @else {
+    @return $min-width;
+  }
+}
+
+/**
+ * Get number value form breakpoints or your custom breakpoint.
+ *
+ * @Function
+ *
+ * @param {Number|String} $breakpoint
+ *
+ * @return {Number|Null}
+ */
+@function get-breakpoint-value($breakpoint) {
+  @if type-of($breakpoint) == "number" {
+    @return $breakpoint;
+  } @else if type-of($breakpoint) == "string" {
+    @return map-get($blisss-global-breakpoints, $breakpoint);
+  } @else {
+    @return null;
+  }
+}
+
+/**
+ * Quick setting @media block.
+ *
+ * @Mixin
+ *
+ * @param {Number|String} $breakpoint - used for parse-query-expression().
+ * @param {Number|String} $breakpoint2 - Default null.
+ */
+@mixin make-response($breakpoint, $breakpoint2: null) {
+  $breakpoint1: get-breakpoint-value($breakpoint);
+  $breakpoint2: get-breakpoint-value($breakpoint2);
+  @media #{parse-query-expression($breakpoint1, $breakpoint2)} {
+    @content;
+  }
+}

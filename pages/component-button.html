@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>blisss</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/blisss.css">
+  <style>
+    .container { background-color: white; }
+    .button {
+      margin-right: 1em;
+    }
+    .size--wide { margin-top: 1em; }
+  </style>
+</head>
+
+<body>
+  <section class="container">
+
+    <h1>Blisss Button 按钮</h1>
+
+    <p>
+      Blisss按钮的基本样式，在使用时通过添加类<code>.button</code>来改变浏览器默认按钮的
+      样式。虽然不做强制要求，但按钮最好使用<code>&lt;button&gt;</code>标签。
+    </p>
+
+    <section class="section">
+      <h2>按钮尺寸</h2>
+      <p>
+          通过使用类<code>.size--small</code>、<code>.size--large</code>来控制按钮
+          的大小，使用<code>.size--wide</code>可以使按钮通栏。
+      </p>
+
+      <section class="[ layout align--top gutter--none ]">
+        <button name="button" type="button" class="button size--small">Small Button</button>
+        <button name="button" type="button" class="button">Button</button>
+        <button name="button" type="button" class="button size--large">Large Button</button>
+        <button name="button" type="button" class="button size--wide">Wide Button</button>
+      </section>
+    </section>
+
+
+    <section>
+
+    </section>
+
+    <button name="button" type="button" class="button round size--wide">Button</button>
+    <button name="button" type="button" class="button state--success">Button</button>
+    <button name="button" type="button" class="button state--warning">Button</button>
+    <button name="button" type="button" class="button state--danger">Button</button>
+    <button name="button" type="button" class="button border">Button</button>
+    <button name="button" type="button" class="button flat">Button</button>
+    <button name="button" type="button" class="button icon">
+        <div class="button__icon">
+          <span class="icon icon--action-account-circle"></span>
+        </div>
+        Button
+    </button>
+    <button name="button" type="button" class="button icon--float">
+        <div class="button__icon">
+          <span class="icon icon--action-account-circle"></span>
+        </div>
+        Button
+    </button>
+    <button name="button" type="button" class="button round icon--float">
+        <div class="button__icon">
+          <span class="icon icon--action-account-circle"></span>
+        </div>
+        Button
+    </button>
+    <button name="button" type="button" class="button icon--only">
+        <div class="button__icon">
+          <span class="icon icon--action-account-circle"></span>
+        </div>
+    </button>
+    <button name="button" type="button" class="button round icon--only">
+        <div class="button__icon">
+          <span class="icon icon--action-account-circle"></span>
+        </div>
+    </button>
+  </section>
+
+</body>
+
+</html>

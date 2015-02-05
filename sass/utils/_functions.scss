@@ -1,47 +1,55 @@
-@function flex-position($position) {
-  @if $position == start {
-    @return flex-start;
-  } @else if $position == end {
-    @return flex-end;
-  } @else if $position == full {
-    @return stretch;
-  } @else if $position == between {
-    @return space-between;
-  } @else {
-    @return $position;
-  }
-}
+@function map-prev-key($map, $key) {
+  @if map-has-key($map, $key) {
+    $keys-list: map-keys($map);
+    $current-key-index: index($keys-list, $key);
 
-@function flex-grow($grow) {
-  @if type-of($grow) == number {
-    @if unitless($grow) {
-      @return $grow 0 0;
+    @if $current-key-index == 0 {
+      @warn "the key in the map is the first, so return itself.";
+      @return $key;
     } @else {
-      @return 0 0 $grow;
+      $prev-key-index: $current-key-index - 1;
+      @return nth($keys-list, $prev-key-index);
     }
+
   } @else {
-    @return $grow;
+    @warn "don't find the key in the map.";
+    @return null;
   }
 }
 
-@function flex-order($order) {
-  @if $order == first {
-    @return -1;
-  } @else if $order == last {
-    @return 1000;
+@function map-next-key($map, $key) {
+  @if map-has-key($map, $key) {
+    $keys-list: map-keys($map);
+    $keys-list-len: length($keys-list);
+    $current-key-index: index($keys-list, $key);
+
+    @if $current-key-index == $keys-list-len {
+      @warn "the key in the map is the last, so return itself.";
+      @return $key;
+    } @else {
+      $next-key-index: $current-key-index + 1;
+      @return nth($keys-list, $next-key-index);
+    }
+
   } @else {
-    @return $order;
+    @warn "don't find the key in the map.";
+    @return null;
   }
 }
 
-@function font-family($font-family: r) {
-  $return-font-family: null;
-  @if $font-family == r {
-    $return-font-family: join($return-font-family, "Roboto");
-  } @else if $font-family == ncjk {
-    $return-font-family: join($return-font-family, "Noto Sans CJK SC");
+@function direction($direction, $inversion: false) {
+  $direction-list: top, right, bottom, left;
+  @if $inversion == false {
+    @return index($direction-list, $direction);
   } @else {
-    $return-font-family: join($return-font-family, $font-family);
+    @if $direction == top {
+      @return 3;
+    } @else if $direction == bottom {
+      @return 1;
+    } @else if $direction == left {
+      @return 2;
+    } @else {
+      @return 4;
+    }
   }
-  @return join($return-font-family, $base-font-family, $separator: comma);
 }

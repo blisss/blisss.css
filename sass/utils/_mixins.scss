@@ -1,23 +1,10 @@
-@mixin flex($items: null, $justify: null) {
-  display: flex;
-  flex-wrap: wrap;
-  @if $justify { justify-content: flex-position($justify); }
-  @if $items { justify-content: flex-position($items); }
-}
-
-@mixin flex-item($grow: null, $order: null) {
-  flex: flex-grow($grow);
-  @if $order { order: flex-order($order); }
-}
-@mixin respond-to($breakpoint: null) {
-  $breakpoints: $global-breakpoints;
-  @media (min-width: inspect(map-get($breakpoints, $breakpoint))) {
-    @content;
+@mixin border-radius($direction, $value) {
+  $h: top, bottom;
+  $v: left, right;
+  $i: direction($direction);
+  @if $i % 2 != 0 {
+    @each $d in $v { border-#{$direction}-#{$d}-radius: $value; }
+  } @else {
+    @each $d in $h { border-#{$d}-#{$direction}-radius: $value; }
   }
-}
-@mixin heading($font-size) {
-  font-size: $font-size;
-  line-height: 1.2 * $font-size;
-  margin: 0 .5 * $font-size 0 .4 * $font-size;
-  @content;
 }

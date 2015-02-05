@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>blisss</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/blisss.css">
+  <style>
+    .container { background-color: white; }
+  </style>
+</head>
+
+<body class="site">
+  <section class="container">
+
+    <h1>Blisss Typography 排版样式</h1>
+
+    <p>
+      常用排版样式，包括标题&lt;h1-h6&gt;，段落&lt;p&gt;和链接&lt;a&gt;的样式。针对CJK
+      类字体做了字体大小，行高的调整。
+    </p>
+
+    <section>
+      <h2>Headers 标题</h2>
+      <h1>Headline h1</h1>
+      <h2>Headline h2</h2>
+      <h3>Headline h3</h3>
+      <h4>Headline h4</h4>
+      <h5>Headline h5</h5>
+      <h6>Headline h6</h6>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Paragraphs 段落</h2>
+      <p>
+        <code>&lt;p&gt;</code>的样式使用全局字体大小和行高，并且设置了<strong>0.8em</strong>的下边距。
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+      </p>
+      <p>
+        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+      </p>
+      <p>
+        Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+      </p>
+
+      <h3>突出显示</h3>
+      <p>
+        为<code>&lt;p&gt;</code>添加<code>.lead</code>可以是段落突出显示，字体也会稍大一些。
+      </p>
+      <p class="lead">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+      </p>
+
+      <h3>响应式特性</h3>
+      <p>
+        为<code>&lt;p&gt;</code>添加<code>.responsive</code>可以让段落成为响应式段落，在不同媒体显示不同的字体大小。
+      </p>
+      <p class="responsive">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+      </p>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Blockquotes 引用块</h2>
+      <p>
+        直接使用<code>&lt;blockquote&gt;</code>标签就可以使用实现引用块的样式。虽然不要求，但最好使用<code>&lt;p&gt;</code>包裹内容，对<code>&lt;p&gt;</code>清除了下边距。
+      </p>
+      <blockquote>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      </blockquote>
+    </section>
+
+    <!-- <section>
+      <h2>Font Weight</h2>
+      <div class="weight--light">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="weight--normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="weight--bold">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+    </section>
+
+    <section>
+      <h2>Font Size</h2>
+      <div class="size--small">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="size--normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="size--more">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="size--large">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="size--great">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="size--1x">Lorem ipsum dolor sit amet.</div>
+      <div class="size--2x">Lorem ipsum dolor sit amet.</div>
+      <div class="size--3x">Lorem ipsum dolor sit amet.</div>
+      <div class="size--4x">Lorem ipsum.</div>
+    </section>
+
+    <section>
+      <h2>Color</h2>
+      <div class="color--dim">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="color--dark">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="color--bright">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+      <div class="color--light">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</div>
+    </section>
+
+    <section>
+      <h2>Line Height</h2>
+      <div class="layout">
+        <div class="layout__item">
+          <p class="line-height--base">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+          </p>
+        </div>
+        <div class="layout__item">
+          <p class="line-height--high">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+          </p>
+        </div>
+        <div class="layout__item">
+          <p class="line-height--higher">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+          </p>
+        </div>
+        <div class="layout__item">
+          <p class="line-height--highest">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+          </p>
+        </div>
+      </div>
+    </section> -->
+
+  </section>
+</body>
+</html>

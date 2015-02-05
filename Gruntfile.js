@@ -41,7 +41,7 @@ var Grunt = function (grunt) {
 
 		watch: {
 			main: {
-				files: ['sass/**/*.scss', '*.html', 'Gruntfile.js'],
+				files: ['sass/**/*.scss', 'pages/*.html', 'Gruntfile.js'],
 				tasks: ['inject:main'],
 				options: {
 					livereload: true
@@ -66,7 +66,7 @@ var Grunt = function (grunt) {
 				expand: true,
 				flatten: true,
 				filter: 'isFile',
-				src: ['*.html'],
+				src: ['pages/*.html'],
 				dest: '<%=tmp%>/'
 			},
 			styles: {

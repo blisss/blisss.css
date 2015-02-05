@@ -2,109 +2,163 @@
     #Grid
 \*------------------------------------*/
 
+$blisss-enable-grid: true;
+$blisss-grid-type: "float";
+$blisss-grid-gutter-base: 14px;
+$blisss-grid-gutter: (
+  "none": 0,
+  "small": $blisss-grid-gutter-base / 2,
+  "large": $blisss-grid-gutter-base * 2
+);
+$blisss-grid-align: (
+  "top": start,
+  "center": center,
+  "bottom": end
+);
+$blisss-grid-container-large-width: 960px;
+$blisss-grid-container-alias: "con";
 
 /**
- * The blisss grid system use css3 for flexbox layout alternative
- * to the traditional grid system. Include flex mixins and functions.
+ * Container styles.
  *
- * Version: 0.1.0
+ * this class set a defualt value for desktop web page.
  *
  * Example:
+ * <div class="container"></div>
+ * <div class="container container--full"></div>
  *
- *  <div class="layout">
- *    <div class="layout__item span--4"></div>
- *    <div class="layout__item span--4"></div>
- *    <div class="layout__item span--4"></div>
- *  </div>
+ * 1. center for screen.
+ * 2. default set 100% width.
+ * 3. set 960px for desktop web page.
+ * 4. use `container--full` class to set 100% width.
+ * 5. set padding offset headling margin.
  */
+.container, .#{$blisss-grid-container-alias} {
+  @extend %space-center; /* [1] */
+  width: 100%; /* [2] */
+  @include make-response(xx)  { max-width: $blisss-grid-container-large-width; }
+  /* [3] */
+  &--full { min-width: 100%; } /* [4] */
+  padding: 1em; /* [5] */
+}
 
-$layout-grid-columns:         $global-layout-grid-columns !default;
-$layout-grid-gutter:          $global-layout-grid-gutter !default;
-$layout-grid-enable-respond:  $global-layout-grid-enable-respond !default;
-$layout-grid-enable-span:     $global-layout-grid-enable-span !default;
-$layout-grid-enable-offset:   $global-layout-grid-enable-offset !default;
+.section { margin: 1em 0; }
 
 /**
- * Row's Basic setting.
+ * Rows styles.
  *
- * 1. Use flexbox dispaly.
- * 2. Set wrap for Responsive grid.
- * 3. Set cell simple gutter.
- * 4. Align way for every cell.
+ * Set some required properties.
+ *
+ * Example:
+ * <div class="layout">
+ *   <div class="layout__item width--4"></div>
+ *   <div class="layout__item width--4"></div>
+ *   <div class="layout__item width--4"></div>
+ * </div>
+ *
+ * 1. set lists styles to `none`.
+ * 2. if use `float` layout, shuold clear the float.
+ * 3. if use `flex` layout, set display property to `flex`.
+ * 4. set default gutter for item.
  */
 .layout {
-  @include flex(); /* [1] */
-  flex-wrap: wrap; /* [2] */
-  margin-left: -$layout-grid-gutter; /* [3] */
+  list-style: none; /* [1] */
 
-  &.align {
-    &--top    { align-items: flex-position(start); } /* [4] */
-    &--center { align-items: flex-position(center); } /* [4] */
-    &--bottom { align-items: flex-position(end); } /* [4] */
-    &--full   { align-items: flex-position(full); } /* [4] */
+  @if $blisss-grid-type == "float" {
+    @extend %clearfix; /* [2] */
+  } @else {
+    @include flex() /* [3] */
   }
 
-  &.gutter--none { margin-left: 0; } /* [5] */
+  margin-left: -$blisss-grid-gutter-base; /* [4] */
 }
 
 /**
- * Cell's Basic setting.
+ * Column styles.
  *
- * 1. Default set cell is a auto grow unit if haven't set the width.
- * 2. Set cell simple gutter.
- * 3. Self align way. Maybe delete `align--top` like row.
+ * Set some required properties.
+ *
+ * 1. set vertical align to `top`.
+ * 2. default set 100% width if don't has the `width` class.
+ * 3. set the minimum height to 1px.
+ * 4. if use `float` layout, set float to `left`.
+ * 5. if use `inline-block`, set display to `inline-block`. maybe you need to
+ *    clear the 'inline-block' space.
+ * 6. if use `flex` layout, set flex-grow to 1 let width of items identical.
+ * 7. set default gutter.
  */
 .layout__item {
-  @include flex-item(1); /* [1] */
-  padding-left: $layout-grid-gutter; /* [2] */
+  vertical-align: top; /* [1] */
+  width: 100%; /* [2] */
+  min-height: 1px; /* [3] */
 
-  &.align {
-    &--top    { align-self: flex-position(start); } /* [3] */
-    &--center { align-self: flex-position(center); } /* [3] */
-    &--bottom { align-self: flex-position(end); } /* [3] */
+  @if $blisss-grid-type == "float" {
+    float: left; /* [4] */
+  } @else if $blisss-grid-type == "inline-block" {
+    display: inline-block; /* [5] */
+  } @else {
+    @include flex-item(1); /* [6] */
   }
 
-  .layout.gutter--none & { padding-left: 0; } /* [4] */
+  padding-left: $blisss-grid-gutter-base; /* [7] */
 }
 
 /**
- * Width and offset for grid system. Enable `offset` switch for use.
+ * Gutter for grid.
+ *
+ * @Mixin
+ *
+ * @param {String} $namespace
  */
-@mixin cell-size($name: null) {
-  @if $name { $name: "-#{$name}"; }
-  @for $i from 1 through $layout-grid-columns {
-    @if $layout-grid-enable-span {
-      .layout__item.span#{$name}--#{$i} { @include flex-item(percentage($i / $layout-grid-columns)); }
+@mixin export-gutter($namespace) {
+ @each $name, $value in $blisss-grid-gutter {
+   .#{$namespace}.gutter--#{$name} {
+     margin-left: -$value;
+     > .#{$namespace}__item {
+       padding-left: $value;
+     }
+   }
+ }
+}
+
+/*
+ * Gutter for grid.
+ *
+ * values: `none`, `small`, `large`.
+ *
+ * Example:
+ * <div class="layout__item gutter--none"><div>
+ * <div class="layout__item gutter--small"><div>
+ */
+@include export-gutter("layout");
+
+/**
+ * Vertical align for flex layout grid.
+ *
+ * @Mixin
+ *
+ * @param {String} - $namespace
+ * @param {String} - $property
+ */
+@mixin export-align($namespace, $property) {
+  .#{$namespace}.align {
+    @each $name, $value in $blisss-grid-align {
+      &--#{$name} { #{$property}: flex-position($value); }
     }
-    @if $layout-grid-enable-offset {
-      .layout__item.offset#{$name}--#{$i} { margin-left: percentage($i / $layout-grid-columns); }
-    }
-  }
-}
-@include cell-size();
-
-/**
- * Responsive grid system. Include mixin `cell-size`.
- */
-@if $layout-grid-enable-respond {
-  $breakpoints: $global-breakpoints;
-  @each $alias, $breakpoint in $breakpoints {
-    @include respond-to($alias) { @include cell-size($alias); }
   }
 }
 
 /**
- * Website use flexbox layout as a high level.
+ * Vertical align for flex layout grid.
+ *
+ * you can set all item vertical align with `layout` class, and can set one item
+ * with `layout__item` class. values: `top`, `center`, `bottom`, default `stretch`.
+ *
+ * Example:
+ * <div class="layout align--top"></div>
+ * <div class="layout__item align--center"></div>
  */
-.site {
-  @include flex(center);
-  height: 100%;
-}
-/**
- * Content container defalut width for responsive layout.
- */
-.container {
-  @include flex-item(1);
-  @include respond-to(xxx) { @include flex-item(960px); }
-  &--full { min-width: 100%; }
+@if $blisss-grid-type == "flex" {
+  @include export-align("layout", align-items);
+  @include export-align("layout__item", align-self);
 }
