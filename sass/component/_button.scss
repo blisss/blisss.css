@@ -109,12 +109,20 @@
   }
 
   /**
-   *
+   * Button hover.
    */
-  &:hover {
+  &:hover { background-color: lighten($blisss-primary-color, 5%); }
+  &.state--success:hover { background-color: find-color("light-green", 300); }
+  &.state--warning:hover { background-color: find-color("amber", 300); }
+  &.state--danger:hover  { background-color: find-color("red", 300); }
 
-  }
-
+  /**
+   * Button active.
+   */
+  &:active { background-color: darken($blisss-primary-color, 5%); }
+  &.state--success:active { background-color: find-color("light-green", 700); }
+  &.state--warning:active { background-color: find-color("amber", 700); }
+  &.state--danger:active  { background-color: find-color("red", 700); }
 
 
 

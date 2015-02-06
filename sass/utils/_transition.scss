@@ -1,4 +1,6 @@
-
+/*------------------------------------*\
+    #TRANSITION
+\*------------------------------------*/
 
 @function trans-timing($timing) {
   @if type-of($timing) == "string" {
