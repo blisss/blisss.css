@@ -1,0 +1,69 @@
+/*------------------------------------*\
+    #FORM
+\*------------------------------------*/
+
+
+$blisss-input-lable-top: .85em;
+.input {
+
+  position: relative;
+  margin-top: 1em;
+
+  > label {
+    position: absolute;
+    left: 0; top: $blisss-input-lable-top;
+    @include transition-simple();
+    color: rgba(black, .38);
+  }
+
+  > input[type=text], textarea {
+    background: none;
+    border: medium none;
+    border-bottom: 1px solid rgba(black, .28);
+    line-height: inherit;
+    padding: 0.85em 0;
+    @include transition-simple();
+  }
+
+  /**
+   * Focus style.
+   */
+  > input[type=text], textarea {
+    &:focus {
+      box-shadow: 0 1px 0 0 $blisss-primary-color;
+      border-bottom-color: $blisss-primary-color;
+
+      + label {
+        color: $blisss-primary-color;
+        @include transition-simple();
+      }
+    }
+  }
+  > label.active {
+    font-size: .85em;
+    transform: translate(0, -1 - $blisss-input-lable-top);
+    @include transition-simple();
+  }
+
+  &__helper {
+    margin-top: .5 * .85em;
+    @extend %clearfix;
+  }
+
+  &__error {
+    font-size: .85em;
+    float: left;
+    color: find-color("red");
+  }
+
+  &__counter {
+    font-size: .85em;
+    float: right;
+    color: $blisss-primary-color;
+    margin-right: -.2em;
+    > span { padding: 0 .2em; }
+  }
+
+
+
+}

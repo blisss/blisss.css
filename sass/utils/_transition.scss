@@ -2,6 +2,8 @@
     #TRANSITION
 \*------------------------------------*/
 
+$blisss-css-perfix: false;
+
 @function trans-timing($timing) {
   @if type-of($timing) == "string" {
     @return unquote($timing);
@@ -20,8 +22,8 @@
   @return $out;
 }
 
-@mixin transition($perfix: false, $values...) {
-  @if $perfix {
+@mixin transition($values...) {
+  @if $blisss-css-perfix {
     @include perfix(transition, $values);
   } @else {
     transition: $values;
@@ -29,6 +31,6 @@
 }
 
 @mixin transition-simple($value: null) {
-  @if $value { @include transition(false, trans($value)); }
-  @else { @include transition(false, trans()); }
+  @if $value { @include transition(trans($value)); }
+  @else { @include transition(trans()); }
 }
