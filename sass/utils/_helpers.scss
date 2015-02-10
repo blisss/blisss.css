@@ -17,3 +17,7 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+%trans {
+  @include transition-simple();
+}

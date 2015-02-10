@@ -34,7 +34,6 @@ $color-all: (
   @return nth($value-list, $index);
 }
 
-$blisss-primary-color: find-color("indigo");
 $blisss-enable-export-color: false;
 
 @mixin export-color() {

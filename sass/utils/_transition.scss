@@ -2,8 +2,6 @@
     #TRANSITION
 \*------------------------------------*/
 
-$blisss-css-perfix: false;
-
 @function trans-timing($timing) {
   @if type-of($timing) == "string" {
     @return unquote($timing);
@@ -13,7 +11,7 @@ $blisss-css-perfix: false;
   }
 }
 
-@function trans($property: all, $duration: 0.28s, $easing: ease-in-out, $delay: 0s) {
+@function trans($property: all, $duration: 0.2s, $easing: ease-in-out, $delay: 0s) {
   $out: ();
   $out: join($out, $property, space);
   $out: join($out, $duration, space);
