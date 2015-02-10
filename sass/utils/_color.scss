@@ -34,16 +34,18 @@ $color-all: (
   @return nth($value-list, $index);
 }
 
-$blisss-primary-color: find-color("indigo");
+$blisss-enable-export-color: false;
 
 @mixin export-color() {
-  @each $key, $value in $color-all {
-    $value-list: map-get($color-all, $key);
-    @for $i from 1 through length($value-list) {
-      $name: nth($color-name, $i);
-      $value: nth($value-list, $i);
-      .color-#{$key}--#{$name} {
-        background-color: $value;
+  @if $blisss-enable-export-color {
+    @each $key, $value in $color-all {
+      $value-list: map-get($color-all, $key);
+      @for $i from 1 through length($value-list) {
+        $name: nth($color-name, $i);
+        $value: nth($value-list, $i);
+        .color-#{$key}--#{$name} {
+          background-color: $value;
+        }
       }
     }
   }

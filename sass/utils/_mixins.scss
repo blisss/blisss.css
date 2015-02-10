@@ -8,3 +8,37 @@
     @each $d in $h { border-#{$d}-#{$direction}-radius: $value; }
   }
 }
+
+@mixin size($width, $height: null) {
+  @if $height {
+    width: $width;
+    height: $height;
+  } @else {
+    width: $width;
+    height: $width;
+  }
+}
+
+@mixin perfix($property, $value, $is-property: true) {
+  @if $is-property {
+    -webkit-#{$property}: $value;
+       -moz-#{$property}: $value;
+            #{$property}: $value;
+  } @else {
+    $property: -webkit-#{$value};
+    $property:    -moz-#{$value};
+    $property:         #{$value};
+  }
+}
+
+@mixin perfix-role($role, $name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}

@@ -4,6 +4,19 @@
 $sys-perfix: "blisss";
 
 /*------------------------------------*\
+    #Perfix
+\*------------------------------------*/
+$blisss-css-perfix: false;
+
+/*------------------------------------*\
+    #Color
+\*------------------------------------*/
+$blisss-primary-color-name: "indigo";
+$blisss-primary-color: find-color($blisss-primary-color-name);
+$blisss-error-color-name: "red";
+$blisss-error-color: find-color($blisss-error-color-name);
+
+/*------------------------------------*\
     #Base
 \*------------------------------------*/
 /**

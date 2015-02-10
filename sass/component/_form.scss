@@ -1,0 +1,334 @@
+/*------------------------------------*\
+    #FORM
+\*------------------------------------*/
+
+
+$blisss-input-lable-space: 8px;
+$blisss-checkbox-size: ($blisss-line-height - 0.25) * 1em;
+$blisss-checkbox-checkmark-size: $blisss-checkbox-size / 1.5;
+$blisss-switch-width: 2.5em;
+$blisss-switch-height: 1.2em;
+.input {
+  margin-top: 1em;
+
+  &__field {
+    position: relative;
+    > label {
+      @extend %fit;
+      padding: $blisss-input-lable-space 0;
+      color: rgba(black, .38);
+      text-align: left;
+      pointer-events: none;
+      @extend %trans;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0%; height: 2px;
+        left: 0; bottom: -1px;
+        @extend %trans;
+      }
+
+      > span {
+        display: inline-block;
+        width: 100%;
+        @extend %trans;
+      }
+    }
+    > input[type=text], textarea {
+      background: none;
+      border: medium none;
+      border-bottom: 1px solid rgba(black, .28);
+      line-height: inherit;
+      padding: $blisss-input-lable-space 0;
+      width: 100%;
+      @extend %trans;
+    }
+
+    /**
+     * Focus style.
+     */
+    > input[type=text], textarea {
+      &:focus {
+        + label {
+          color: $blisss-primary-color;
+          @extend %trans;
+
+          &:after { background-color: $blisss-primary-color; }
+        }
+      }
+    }
+    .input.active > & > label {
+      &:after {
+        width: 100%;
+        @extend %trans;
+      }
+
+      > span {
+        font-size: .85em;
+        transform: translate(0, -110%);
+        @extend %trans;
+      }
+    }
+  }
+
+  /**
+   * Helper.
+   */
+  &__helper {
+    margin-top: $blisss-input-lable-space;
+    @extend %clearfix;
+  }
+
+  &__error {
+    font-size: .85em;
+    float: left;
+    color: $blisss-error-color;
+    display: none;
+  }
+
+  &__counter {
+    font-size: .85em;
+    float: right;
+    color: $blisss-primary-color;
+    margin-right: -.2em;
+    > span { padding: 0 .2em; }
+  }
+
+  &.error {
+    .input__field {
+      > input[type=text], textarea {
+        border-bottom-color: $blisss-error-color;
+        box-shadow: 0 1px 0 0 $blisss-error-color;
+        &:focus {
+          + label {
+            &:after { background-color: $blisss-error-color; }
+          }
+        }
+      }
+    }
+    .input__error { display: block; }
+  }
+
+}
+
+/**
+ * Checkbox styles.
+ */
+%toggle-display {
+  position: absolute;
+  z-index: -999;
+}
+.checkbox {
+  display: inline-block;
+  @mixin checkbox-checked() {
+    &:before {
+      background-color: $blisss-primary-color;
+      border-color: $blisss-primary-color;
+      @extend %trans;
+    }
+    &:after {
+      border-color: white;
+      transform: rotate(45deg) scale(1);
+      @extend %trans;
+    }
+  }
+
+  > input[type=checkbox] {
+    @extend %toggle-display;
+    &:checked + label { @include checkbox-checked(); }
+  }
+  > label {
+    position: relative;
+    padding-left: $blisss-checkbox-size * 1.5;
+    padding-top: 2px;
+    &:before {
+      content: '';
+      position: absolute;
+      cursor: pointer;
+      left: 0; top: 0;
+      border: 2px solid rgba(black, .38);
+      border-radius: 2px;
+      @include size($blisss-checkbox-size);
+      @extend %trans;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      cursor: pointer;
+      left: $blisss-checkbox-size / 3; top: 1px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(0deg) scale(0);
+      @include size($blisss-checkbox-checkmark-size / 2, $blisss-checkbox-checkmark-size);
+      @extend %trans;
+    }
+    .checkbox.active > & { @include checkbox-checked(); }
+  }
+}
+
+/**
+ * Radio styles.
+ */
+.radio {
+  display: inline-block;
+  @mixin radio-checked() {
+    &:before {
+      border-color: $blisss-primary-color;
+      @extend %trans;
+    }
+    &:after {
+      border-color: white;
+      transform: scale(0.75);
+      @extend %trans;
+    }
+  }
+
+  > input[type=radio] {
+    @extend %toggle-display;
+    &:checked + label { @include radio-checked(); }
+  }
+  > label {
+    position: relative;
+    padding-left: $blisss-checkbox-size * 1.5;
+    padding-top: 2px;
+    &:before {
+      content: '';
+      position: absolute;
+      cursor: pointer;
+      left: 0; top: 0;
+      border: 2px solid rgba(black, .38);
+      border-radius: 50%;
+      @include size($blisss-checkbox-size);
+      @extend %trans;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      cursor: pointer;
+      left: 0; top: 0;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      transform: scale(0);
+      background-color: $blisss-primary-color;
+      @include size($blisss-checkbox-size);
+      @extend %trans;
+    }
+    .radio.active > & { @include radio-checked(); }
+  }
+}
+
+/**
+ * Switch style.
+ */
+.switch {
+  position: relative;
+  height: $blisss-switch-height;
+  display: inline-block;
+  > input[type=checkbox] {
+    @extend %toggle-display;
+    &:checked {
+      + label {
+        &:after {
+          left: $blisss-switch-width - $blisss-switch-height;
+          @extend %trans;
+        }
+      }
+    }
+  }
+  > label {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      border-radius: .5 * 1em;
+      @include size($blisss-switch-width, 1em);
+      background-color: rgba(black, .28);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: -.5 * ($blisss-switch-height - 1); left: 0;
+      border-radius: 50%;
+      @include size($blisss-switch-height);
+      @include shadow(1);
+      background-color: white;
+      @extend %trans;
+    }
+  }
+}
+
+/**
+ * Data Picker
+ */
+.picker {
+  text-align: center;
+  @include shadow(1);
+  &__header {
+    background-color: find-color($blisss-primary-color-name, 700);
+    color: white;
+    padding: 0.35em;
+    @include border-radius("top", 2px);
+  }
+  &__display {
+    background-color: $blisss-primary-color;
+    color: white;
+    padding: 0.8em;
+  }
+  &__selector {
+    background-color: white;
+  }
+  &__footer {
+    text-align: right;
+    @include border-radius("bottom", 2px);
+    padding: .55em 0;
+  }
+}
+.picker-date {
+  $blisss-picker-data-day-size: 2.5em;
+  width: $blisss-picker-data-day-size * 7 + 2em;
+
+  &__month-selected {
+    font-size: 1.5em;
+    letter-spacing: 10px;
+    padding-left: 10px;
+  }
+  &__day-selected {
+    font-size: 4em;
+    line-height: 1;
+  }
+  &__year-selected {
+    font-size: 1.5em;
+    color: rgba(white, .54);
+    letter-spacing: 2px;
+    padding-left: 2px;
+  }
+  &__date {
+    font-weight: bold;
+    padding: 0.5em;
+    span {
+      padding: 0 0.1em;
+    }
+  }
+  &__calendar {
+
+    text-align: left;
+    padding: 0 1em;
+    span {
+      display: inline-block;
+      float: left;
+      @include size($blisss-picker-data-day-size);
+      text-align: center;
+      border-radius: 50%;
+      line-height: 1;
+      padding: .5 * ($blisss-picker-data-day-size - 1);
+      cursor: pointer;
+      &.active {
+        background-color: $blisss-primary-color;
+        color: white;
+      }
+    }
+  }
+  &__row { @extend %clearfix; }
+  &__week { color: rgba(black, .54); }
+}

@@ -10,19 +10,18 @@
 
 @function timing-keyword($keyword) {
 	$keyword: nth($keyword , 1);
-	$default: ease-in-out;
-	@if $keyword == eio {
+	@if $keyword == "in-out" {
 		@return ease-in-out;
-	} @else if $keyword == ei {
+	} @else if $keyword == "in" {
 		@return ease-in;
-	} @else if $keyword == eo {
+	} @else if $keyword == "out" {
 		@return ease-out;
-	} @else if $keyword == l {
+	} @else if $keyword == "line" {
 		@return linear;
-	} @else if $keyword == e {
+	} @else if $keyword == "ease" {
 		@return ease;
 	} @else {
-		@return $default;
+		@return ease-in-out;
 	}
 }
 
@@ -60,10 +59,6 @@
 	}
 }
 
-@mixin transition($property: all, $duration: 0.4s, $timing-function: timing-function(eio), $delay: 0s) {
-	$transition-property: $property;
-	$transition-duration: $duration;
-	$transition-timing-function: $timing-function;
-	$transition-delay: $delay;
-	transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+@mixin transition($property: all, $duration: 0.28s, $easing: timing-function("in-out"), $delay: 0s) {
+	transition: $property $duration $easing $delay;
 }
