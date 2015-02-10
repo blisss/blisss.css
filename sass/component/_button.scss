@@ -18,7 +18,7 @@
   /**
    * Size of button
    */
-  min-width: 130px;
+  min-width: 88px;
   padding: 6px 0;
   font-size: 14px;
   &.size--small {
@@ -56,14 +56,17 @@
    */
   @mixin button-type($type: "flat", $color: $blisss-primary-color) {
     background-color: transparent;
-    &:before, &:after { box-shadow: none; }
+    box-shadow: none;
     color: $color;
     @if $type == "border" {
       border: 1px solid $color;
     }
   }
   &.border { @include button-type("border"); }
-  &.flat { @include button-type(); }
+  &.flat {
+    min-width: 56px;
+    @include button-type();
+  }
 
   /**
    * Button with icon
